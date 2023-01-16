@@ -21,3 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/formRegEmpleado', 'App\Http\Controllers\ControllerFormRegEmpleado')->name('formRegEmpleado');
 Route::post('formRegEmpleado', 'App\Http\Controllers\ControllerDatosFormRegEmpleado@enviar');
+
+Route::get('/formRegCliente', 'App\Http\Controllers\ControllerFormRegCliente')->name('formRegCliente');
+Route::post('formRegCliente', 'App\Http\Controllers\ControllerDatosFormRegCliente@enviar');
+
+Route::get('/formMantenimientoCliente', 'App\Http\Controllers\ControllerFormMantenimientoCliente')->name('formMantenimientoCliente');
+Route::post('formMantenimientoCliente', 'App\Http\Controllers\ControllerDatosFormMantenimientoCliente@enviar');
+
+Route::get('/formTarea', 'App\Http\Controllers\ControllerFormTarea')->name('formTarea');
+Route::post('formTarea', 'App\Http\Controllers\ControllerDatosFormTarea@enviar');
