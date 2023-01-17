@@ -6,18 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Rules\DniRule;
 
+use App\Models\Empleado;
+
 class ControllerDatosFormRegEmpleado extends Controller
 {
     public function enviar()
     {
-        request()->validate([
+        $datos = request()->validate([
             'nif' => ['required', new DniRule],
-            'nombre' => 'required|min:3|max:100',
+            'nombre_y_apellidos' => 'required|min:3|max:100|regex:/^[^,]*$/',
+            'clave' => 'required|min:6|max:15|regex:/^[^,]*$/',
+            'fecha_alta' => 'required',
             'correo' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
-            'direccion' => 'required',
-            'es_admin' => 'required|in:admin,operario',
+            'direccion' => 'required|min:6|max:100',
+            'es_admin' => 'required',
         ]);
-        return view('formRegEmpleado');
+
+        Empleado::create($datos);
+
+        session()->flash('message', 'El empleado ha sido registrado correctamente.');
+
+        return redirect()->route('formRegEmpleado');
     }
 }

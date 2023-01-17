@@ -8,31 +8,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>@yield('titulo')</title>
+    <style>
+        .nav-link.active {
+            font-size: 20px;
+        }
+    </style>
 </head>
 
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Menu</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{ route('formRegEmpleado') }}">Insertar Empleado</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('formRegCliente') }}">Insertar Cliente</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('formTarea') }}">Insertar Tareas</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('formMantenimientoCliente') }}">Insertar Cuota</a>
-                </li>
-            </ul>
-        </div>
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="nav navbar-nav">
+        <a class="nav-link {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
+            href="{{ route('formRegEmpleado') }}">Insertar Empleado</a>
+        <a class="nav-link {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
+            href="{{ route('formRegCliente') }}">Insertar Cliente</a>
+        <a class="nav-link {{ request()->routeIs('formTarea') ? 'active' : '' }}"
+            href="{{ route('formTarea') }}">Insertar Tareas</a>
+        <a class="nav-link {{ request()->routeIs('formMantenimientoCliente') ? 'active' : '' }}"
+            href="{{ route('formMantenimientoCliente') }}">Insertar Cuota</a>
     </div>
 </nav>
 

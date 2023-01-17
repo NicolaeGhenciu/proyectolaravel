@@ -30,3 +30,5 @@ Route::post('formMantenimientoCliente', 'App\Http\Controllers\ControllerDatosFor
 
 Route::get('/formTarea', 'App\Http\Controllers\ControllerFormTarea')->name('formTarea');
 Route::post('formTarea', 'App\Http\Controllers\ControllerDatosFormTarea@enviar');
+
+Route::get('/verTareas', 'App\Http\Controllers\ControllerFormTarea@ver')->name('verTareas');
