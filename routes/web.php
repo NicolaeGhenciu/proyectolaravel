@@ -28,7 +28,11 @@ Route::post('formRegCliente', 'App\Http\Controllers\ControllerDatosFormRegClient
 Route::get('/formMantenimientoCliente', 'App\Http\Controllers\ControllerFormMantenimientoCliente')->name('formMantenimientoCliente');
 Route::post('formMantenimientoCliente', 'App\Http\Controllers\ControllerDatosFormMantenimientoCliente@enviar');
 
-Route::get('/formTarea', 'App\Http\Controllers\ControllerFormTarea')->name('formTarea');
-Route::post('formTarea', 'App\Http\Controllers\ControllerDatosFormTarea@enviar');
+Route::get('/formTarea', 'App\Http\Controllers\ControllerTareas@formularioInsertar')->name('formTarea');
+Route::post('formTarea', 'App\Http\Controllers\ControllerTareas@validarInsertar');
 
-Route::get('/verTareas', 'App\Http\Controllers\ControllerFormTarea@ver')->name('verTareas');
+Route::get('/listaTareas', 'App\Http\Controllers\ControllerTareas@listar')->name('listaTareas');
+
+Route::get('/mensajeBorrarTarea', 'App\Http\Controllers\ControllerTareas@mensajeBorrar')->name('mensajeBorrarTarea');
+
+Route::get('/borrarTarea', 'App\Http\Controllers\ControllerTareas@borrarTarea')->name('borrarTarea');

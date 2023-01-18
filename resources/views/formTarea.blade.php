@@ -36,7 +36,8 @@
 
         <div class="col-md-3">
             <label for="nombre_y_apellidos" class="form-label">Nombre y Apellidos: </label>
-            <input class="form-control" type="text" name="nombre_y_apellidos" placeholder="Nombre y apellidos" value="{{ old('nombre_y_apellidos') }}">
+            <input class="form-control" type="text" name="nombre_y_apellidos" placeholder="Nombre y apellidos"
+                value="{{ old('nombre_y_apellidos') }}">
             {!! $errors->first('nombre_y_apellidos', '<b style="color: red">:message</b>') !!}
         </div>
 
@@ -48,7 +49,12 @@
 
         <div class="col-md-3">
             <label for="correo" class="form-label">Correo electrónico: </label>
-            <input class="form-control" type="text" name="correo" placeholder="Correo electrónico" value="{{ old('correo') }}">
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                <input class="form-control" type="text" name="correo" placeholder="Correo electrónico"
+                    value="{{ old('correo') }}">
+            </div>
+
             {!! $errors->first('correo', '<b style="color: red">:message</b>') !!}
         </div>
 
@@ -62,19 +68,22 @@
 
         <div class="col-md-3">
             <label for="direccion" class="form-label">Dirección: </label>
-            <input class="form-control" type="text" name="direccion" placeholder="Dirección" value="{{ old('direccion') }}">
+            <input class="form-control" type="text" name="direccion" placeholder="Dirección"
+                value="{{ old('direccion') }}">
             {!! $errors->first('direccion', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="poblacion" class="form-label">Población: </label>
-            <input class="form-control" type="text" name="poblacion" placeholder="Población" value="{{ old('poblacion') }}">
+            <input class="form-control" type="text" name="poblacion" placeholder="Población"
+                value="{{ old('poblacion') }}">
             {!! $errors->first('poblacion', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">
             <label for="codigo_postal" class="form-label">Código Postal: </label>
-            <input class="form-control" type="text" name="codigo_postal" placeholder="Código Postal" value="{{ old('codigo_postal') }}">
+            <input class="form-control" type="text" name="codigo_postal" placeholder="Código Postal"
+                value="{{ old('codigo_postal') }}">
             {!! $errors->first('codigo_postal', '<b style="color: red">:message</b>') !!}
         </div>
 

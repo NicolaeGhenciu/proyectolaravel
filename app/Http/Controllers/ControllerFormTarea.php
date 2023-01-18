@@ -18,9 +18,23 @@ class ControllerFormTarea extends Controller
         return view('formTarea', compact('provincias', 'empleados', 'clientes'));
     }
 
-    public function ver()
+    public function listar()
     {
-        $tareas = Tarea::paginate(10);
-        return view('verTareas', compact('tareas'));
+        $tareas = Tarea::orderBy('fecha_realizacion', 'desc')->paginate(10);
+        return view('listaTareas', compact('tareas'));
+    }
+
+    public function mensajeBorrar(Request $request)
+    {
+        $tarea = Tarea::find($request->id);
+        return view('mensajeBorrarTarea', compact('tarea'));
+    }
+
+    public function borrarTarea(Request $request)
+    {
+        Tarea::find($request->id)->delete();
+        $tareas = Tarea::orderBy('fecha_realizacion', 'desc')->paginate(10);
+        session()->flash('message', 'La tarea ha sido borrada correctamente.');
+        return redirect()->route('listarTareas');
     }
 }
