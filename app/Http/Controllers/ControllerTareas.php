@@ -52,6 +52,12 @@ class ControllerTareas extends Controller
         return view('listaTareas', compact('tareas'));
     }
 
+    public function detallesTarea(Request $request)
+    {
+        $tarea = Tarea::find($request->id);
+        return view('detallesTarea', compact('tarea'));
+    }
+
     public function mensajeBorrar(Request $request)
     {
         $tarea = Tarea::find($request->id);

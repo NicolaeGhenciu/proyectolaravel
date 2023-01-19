@@ -4,15 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Pais;
+use App\Models\Cliente;
+
 use App\Rules\CifRules;
 
-use App\Models\Cliente;
-use Symfony\Component\Console\Input\Input;
 
-class ControllerDatosFormRegCliente extends Controller
+
+class ControllerClientes extends Controller
 {
+    public function formularioInsertar(Request $request)
+    {
+        $paises = Pais::all();
+        return view('formRegCliente', compact('paises'));
+    }
 
-    public function enviar()
+    public function validarInsertar()
     {
 
         $validatedData = request()->validate([

@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\ControllerTareas;
+use App\Http\Controllers\ControllerClientes;
+use App\Http\Controllers\ControllerEmpleados;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,26 +18,108 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+//Empleado
 
-// Route::view('/','formRegEmpleado')->name('formRegEmpleado');
+Route::get('/formRegEmpleado', [ControllerEmpleados::class, 'formularioInsertar'])->name('formRegEmpleado');
+Route::post('formRegEmpleado', [ControllerEmpleados::class, 'validarInsertar']);
 
-Route::get('/formRegEmpleado', 'App\Http\Controllers\ControllerFormRegEmpleado')->name('formRegEmpleado');
-Route::post('formRegEmpleado', 'App\Http\Controllers\ControllerDatosFormRegEmpleado@enviar');
+//Cliente
 
-Route::get('/formRegCliente', 'App\Http\Controllers\ControllerFormRegCliente')->name('formRegCliente');
-Route::post('formRegCliente', 'App\Http\Controllers\ControllerDatosFormRegCliente@enviar');
+Route::get('/formRegCliente', [ControllerClientes::class, 'formularioInsertar'])->name('formRegCliente');
+Route::post('formRegCliente', [ControllerClientes::class, 'validarInsertar']);
 
 Route::get('/formMantenimientoCliente', 'App\Http\Controllers\ControllerFormMantenimientoCliente')->name('formMantenimientoCliente');
 Route::post('formMantenimientoCliente', 'App\Http\Controllers\ControllerDatosFormMantenimientoCliente@enviar');
 
-Route::get('/formTarea', 'App\Http\Controllers\ControllerTareas@formularioInsertar')->name('formTarea');
-Route::post('formTarea', 'App\Http\Controllers\ControllerTareas@validarInsertar');
+//Tareas
 
-Route::get('/listaTareas', 'App\Http\Controllers\ControllerTareas@listar')->name('listaTareas');
+Route::get('/formTarea', [ControllerTareas::class, 'formularioInsertar'])->name('formTarea');
+Route::post('formTarea', [ControllerTareas::class, 'validarInsertar']);
 
-Route::get('/mensajeBorrarTarea', 'App\Http\Controllers\ControllerTareas@mensajeBorrar')->name('mensajeBorrarTarea');
+Route::get('/listaTareas', [ControllerTareas::class, 'listar'])->name('listaTareas');
 
-Route::get('/borrarTarea', 'App\Http\Controllers\ControllerTareas@borrarTarea')->name('borrarTarea');
+Route::get('/detallesTarea', [ControllerTareas::class, 'detallesTarea'])->name('detallesTarea');
+
+Route::get('/mensajeBorrarTarea', [ControllerTareas::class, 'mensajeBorrar'])->name('mensajeBorrarTarea');
+
+Route::get('/borrarTarea', [ControllerTareas::class, 'borrarTarea'])->name('borrarTarea');
+
+// Route::get('/tareas/crear', 'TareasController@formularioInsertar')->name('tareas.crear');
+// Route::post('/tareas', 'TareasController@validarInsertar')->name('tareas.store');
+// Route::get('/tareas', 'TareasController@listar')->name('tareas.index');
+// Route::get('/tareas/{tarea}', 'TareasController@detalles')->name('tareas.detalles');
+// Route::get('/tareas/{tarea}/eliminar', 'TareasController@mensajeBorrar')->name('tareas.eliminar');
+// Route::delete('/tareas/{tarea}', 'TareasController@borrar')->name('tareas.destroy');
+
+// <?php
+
+// namespace App\Http\Controllers;
+
+// use Illuminate\Http\Request;
+// use App\Models\Tarea;
+// use App\Models\Provincia;
+// use App\Models\Empleado;
+// use App\Models\Cliente;
+
+// class TareasController extends Controller
+// {
+//     public function formularioInsertar()
+//     {
+//         $provincias = Provincia::all();
+//         $empleados = Empleado::all();
+//         $clientes = Cliente::all();
+//         return view('tareas.crear', compact('provincias', 'empleados', 'clientes'));
+//     }
+
+//     public function validarInsertar(Request $request)
+//     {
+//         $datos = $request->validate([
+//             'cliente' => 'required',
+//             'nombre_y_apellidos' => 'required|min:3|max:100|regex:/^[^,]*$/',
+//             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+//             'correo' => 'required|email',
+//             'descripcion' => 'required',
+//             'direccion' => 'required',
+//             'poblacion' => 'required',
+//             'codigo_postal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
+//             'provincia' => 'required',
+//             'estado' => 'required',
+//             'operario_encargado' => 'required',
+//             'fecha_realizacion' => 'required|after:now',
+//         ]);
+
+//         $datos['fecha_creacion'] = (new \DateTime())->format('Y-m-d');
+
+//         Tarea::create($datos);
+
+//         session()->flash('message', 'La tarea ha sido registrado correctamente.');
+
+//         return redirect()->route
+
+
+// 'route('tareas.index');
+// }
+
+// Copy code
+// public function listar()
+// {
+//     $tareas = Tarea::orderBy('fecha_realizacion', 'desc')->paginate(10);
+//     return view('tareas.index', compact('tareas'));
+// }
+
+// public function detalles(Tarea $tarea)
+// {
+//     return view('tareas.detalles', compact('tarea'));
+// }
+
+// public function mensajeBorrar(Tarea $tarea)
+// {
+//     return view('tareas.eliminar', compact('tarea'));
+// }
+
+// public function borrar(Tarea $tarea)
+// {
+//     $tarea->delete();
+//     session()->flash('message', 'La tarea ha sido eliminada correctamente.');
+//     return redirect()->route('tareas.index');
+// }

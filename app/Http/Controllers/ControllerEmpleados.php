@@ -8,9 +8,14 @@ use App\Rules\DniRule;
 
 use App\Models\Empleado;
 
-class ControllerDatosFormRegEmpleado extends Controller
+class ControllerEmpleados extends Controller
 {
-    public function enviar()
+    public function formularioInsertar(Request $request)
+    {
+        return view('formRegEmpleado', $request);
+    }
+
+    public function validarInsertar()
     {
         $datos = request()->validate([
             'nif' => ['required', new DniRule],

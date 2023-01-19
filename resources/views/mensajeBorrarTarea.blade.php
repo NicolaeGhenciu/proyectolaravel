@@ -17,7 +17,7 @@
 @section('contenido')
     <br>
     <div id="centrar">
-        <h2>¿Estas seguro de querer borrar la Tarea {{ request('id') }}?</h2>
+        <h2>¿Estas seguro de querer borrar la tarea {{ request('id') }}?</h2>
     </div>
 
     <div id="cuerpo">
@@ -53,6 +53,16 @@
                 </tbody>
             </table>
         </div>
+
+        <div id="centrar">
+            <form action="{{ route('tareas.destroy', $tarea) }}" method="post">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Borrar</button>
+                <a class="btn btn-success" href="{{ route('tareas.index') }}">Volver atrás</a>
+            </form>
+        </div>
+
         <div id="centrar">
             <a class="btn btn-danger"
                 href="{{ route('borrarTarea', ['id' => $tarea->id]) }}">Borrar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
