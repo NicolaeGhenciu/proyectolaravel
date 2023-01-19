@@ -54,6 +54,7 @@
             </table>
         </div>
 
+        {{-- 
         <div id="centrar">
             <form action="{{ route('tareas.destroy', $tarea) }}" method="post">
                 @csrf
@@ -61,14 +62,15 @@
                 <button type="submit" class="btn btn-danger">Borrar</button>
                 <a class="btn btn-success" href="{{ route('tareas.index') }}">Volver atrás</a>
             </form>
-        </div>
+        </div> --}}
 
         <div id="centrar">
-            <a class="btn btn-danger"
-                href="{{ route('borrarTarea', ['id' => $tarea->id]) }}">Borrar</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a
-                class="btn btn-success" href="{{ route('listaTareas') }}">Volver
-                atras</a>
+            <form action="{{ route('borrarTarea', $tarea) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Borrar</button>
+                <a class="btn btn-success" href="{{ route('listaTareas') }}">Volver atras</a>
+            </form>
         </div>
-
 
     @endsection

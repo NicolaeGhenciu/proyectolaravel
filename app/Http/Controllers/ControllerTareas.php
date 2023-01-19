@@ -52,21 +52,40 @@ class ControllerTareas extends Controller
         return view('listaTareas', compact('tareas'));
     }
 
-    public function detallesTarea(Request $request)
+    // public function listar()
+
+    // public function detallesTarea(Request $request)
+    // {
+    //     $tarea = Tarea::find($request->id);
+    //     return view('detallesTarea', compact('tarea'));
+    // }
+
+    public function detallesTarea(Tarea $tarea)
     {
-        $tarea = Tarea::find($request->id);
         return view('detallesTarea', compact('tarea'));
     }
 
-    public function mensajeBorrar(Request $request)
+    // public function mensajeBorrar(Request $request)
+    // {
+    //     $tarea = Tarea::find($request->id);
+    //     return view('mensajeBorrarTarea', compact('tarea'));
+    // }
+
+    public function mensajeBorrar(Tarea $tarea)
     {
-        $tarea = Tarea::find($request->id);
         return view('mensajeBorrarTarea', compact('tarea'));
     }
 
-    public function borrarTarea(Request $request)
+    // public function borrarTarea(Request $request)
+    // {
+    //     Tarea::find($request->id)->delete();
+    //     session()->flash('message', 'La tarea ha sido borrada correctamente.');
+    //     return redirect()->route('listaTareas');
+    // }
+
+    public function borrarTarea(Tarea $tarea)
     {
-        Tarea::find($request->id)->delete();
+        $tarea->delete();
         session()->flash('message', 'La tarea ha sido borrada correctamente.');
         return redirect()->route('listaTareas');
     }
