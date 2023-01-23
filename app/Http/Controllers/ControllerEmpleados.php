@@ -34,4 +34,22 @@ class ControllerEmpleados extends Controller
 
         return redirect()->route('formRegEmpleado');
     }
+
+    public function listar()
+    {
+        $empleados = Empleado::orderBy('id', 'desc')->paginate(10);
+        return view('listaEmpleados', compact('empleados'));
+    }
+
+    public function mensajeBorrar(Empleado $empleado)
+    {
+        return view('mensajeBorrarEmpleado', compact('empleado'));
+    }
+
+    public function borrarEmpleado(Empleado $empleado)
+    {
+        $empleado->delete();
+        session()->flash('message', 'El empleado ha sido borrado correctamente.');
+        return redirect()->route('listaEmpleados');
+    }
 }

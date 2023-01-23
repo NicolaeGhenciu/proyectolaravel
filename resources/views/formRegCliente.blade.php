@@ -42,9 +42,13 @@
         </div>
 
         <div class="col-md-3">
-            <label for="correo" class="form-label">Correo:</label>
-            <input class="form-control" type="text" name="correo" value="{{ old('correo') }}"
-                placeholder="Correo Electronico">
+            <label for="correo" class="form-label">Correo electrónico: </label>
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                <input class="form-control" type="text" name="correo" placeholder="Correo electrónico"
+                    value="{{ old('correo') }}">
+            </div>
+
             {!! $errors->first('correo', '<b style="color: red">:message</b>') !!}
         </div>
 

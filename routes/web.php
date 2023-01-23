@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerTareas;
 use App\Http\Controllers\ControllerClientes;
 use App\Http\Controllers\ControllerEmpleados;
+use App\Http\Controllers\ControllerCuotas;
 
 
 /*
@@ -23,13 +24,27 @@ use App\Http\Controllers\ControllerEmpleados;
 Route::get('/formRegEmpleado', [ControllerEmpleados::class, 'formularioInsertar'])->name('formRegEmpleado');
 Route::post('formRegEmpleado', [ControllerEmpleados::class, 'validarInsertar']);
 
+Route::get('/listaEmpleados', [ControllerEmpleados::class, 'listar'])->name('listaEmpleados');
+
+Route::get('/mensajeBorrarEmpleado/{empleado}', [ControllerEmpleados::class, 'mensajeBorrar'])->name('mensajeBorrarEmpleado');
+
+Route::delete('/borrarEmpleado/{empleado}', [ControllerEmpleados::class, 'borrarEmpleado'])->name('borrarEmpleado');
+
 //Cliente
 
 Route::get('/formRegCliente', [ControllerClientes::class, 'formularioInsertar'])->name('formRegCliente');
 Route::post('formRegCliente', [ControllerClientes::class, 'validarInsertar']);
 
-Route::get('/formMantenimientoCliente', 'App\Http\Controllers\ControllerFormMantenimientoCliente')->name('formMantenimientoCliente');
-Route::post('formMantenimientoCliente', 'App\Http\Controllers\ControllerDatosFormMantenimientoCliente@enviar');
+Route::get('/listaClientes', [ControllerClientes::class, 'listar'])->name('listaClientes');
+
+Route::get('/mensajeBorrarCliente/{cliente}', [ControllerClientes::class, 'mensajeBorrar'])->name('mensajeBorrarCliente');
+
+Route::delete('/borrarCliente/{cliente}', [ControllerClientes::class, 'borrarCliente'])->name('borrarCliente');
+
+//Cuotas
+
+Route::get('/formCuota', [ControllerCuotas::class, 'formularioInsertar'])->name('formCuota');
+Route::post('formCuota', [ControllerCuotas::class, 'validarInsertar']);
 
 //Tareas
 

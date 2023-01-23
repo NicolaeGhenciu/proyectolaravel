@@ -1,4 +1,4 @@
-@section('titulo', 'Lista de Empleados')
+@section('titulo', 'Lista de Clientes')
 
 @extends('base')
 
@@ -24,7 +24,7 @@
 
     <div id="cuerpo">
 
-        <h3 id="centrar">Lista de empleados</h3>
+        <h3 id="centrar">Lista de clientes</h3>
 
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -37,30 +37,29 @@
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Id</th>
-                        <th scope="col">NIF</th>
+                        <th scope="col">CIF</th>
                         <th scope="col">Nombre y Apellidos</th>
-                        <th scope="col">Contraseña</th>
-                        <th scope="col">Fecha de alta</th>
-                        <th scope="col">Correo</th>
                         <th scope="col">Télefono</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col">Rol</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Cuenta Corriente</th>
+                        <th scope="col">Importe Mensual</th>
+                        <th scope="col">País</th>
+                        <th scope="col">Moneda</th>
                         <th scope="col">Opciones</th>
-
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($empleados as $empleado)
+                    @foreach ($clientes as $cliente)
                         <tr>
-                            <td>{{ $empleado->id }}</td>
-                            <td>{{ $empleado->nif }}</td>
-                            <td>{{ $empleado->nombre_y_apellidos }}</td>
-                            <td>{{ $empleado->clave }}</td>
-                            <td>{{ date('d-m-Y', strtotime($empleado->fecha_alta)) }}</td>
-                            <td>{{ $empleado->correo }}</td>
-                            <td>{{ $empleado->telefono }}</td>
-                            <td>{{ $empleado->direccion }}</td>
-                            <td>{{ $empleado->es_admin == 0 ? '👨🏻‍🔧 Operario' : '👨🏻‍💼 Administrador' }}</td>
+                            <td>{{ $cliente->id }}</td>
+                            <td>{{ $cliente->cif }}</td>
+                            <td>{{ $cliente->nombre_y_apellidos }}</td>
+                            <td>{{ $cliente->telefono }}</td>
+                            <td>{{ $cliente->correo }}</td>
+                            <td>{{ $cliente->cuenta_corriente }}</td>
+                            <td>{{ $cliente->importe_cuota_mensual }}</td>
+                            <td>{{ $cliente->pais }}</td>
+                            <td>{{ $cliente->moneda }}</td>
                             <td><a class="btn btn-warning" href="#" title="Modificar"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -69,7 +68,7 @@
                                         <path fill-rule="evenodd"
                                             d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                     </svg></a>&nbsp;<a class="btn btn-danger"
-                                    href="{{ route('mensajeBorrarEmpleado', $empleado) }}" title="Borrar"><svg
+                                    href="{{ route('mensajeBorrarCliente', $cliente) }}" title="Borrar"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-trash-fill" viewBox="0 0 16 16">
                                         <path
@@ -84,22 +83,22 @@
         <div id="centrar">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item {{ $empleados->currentPage() == 1 ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $empleados->previousPageUrl() }}">Anterior</a>
+                    <li class="page-item {{ $clientes->currentPage() == 1 ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $clientes->previousPageUrl() }}">Anterior</a>
                     </li>
-                    <li class="page-item {{ $empleados->currentPage() == 1 ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $empleados->url(1) }}">Primera</a>
+                    <li class="page-item {{ $clientes->currentPage() == 1 ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $clientes->url(1) }}">Primera</a>
                     </li>
-                    @for ($i = 1; $i <= $empleados->lastPage(); $i++)
-                        <li class="page-item {{ $empleados->currentPage() == $i ? 'active' : '' }}">
-                            <a class="page-link" href="{{ $empleados->url($i) }}">{{ $i }}</a>
+                    @for ($i = 1; $i <= $clientes->lastPage(); $i++)
+                        <li class="page-item {{ $clientes->currentPage() == $i ? 'active' : '' }}">
+                            <a class="page-link" href="{{ $clientes->url($i) }}">{{ $i }}</a>
                         </li>
                     @endfor
-                    <li class="page-item {{ $empleados->currentPage() == $empleados->lastPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $empleados->url(5) }}">Última</a>
+                    <li class="page-item {{ $clientes->currentPage() == $clientes->lastPage() ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $clientes->url(5) }}">Última</a>
                     </li>
-                    <li class="page-item {{ $empleados->currentPage() == $empleados->lastPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $empleados->nextPageUrl() }}">Siguiente</a>
+                    <li class="page-item {{ $clientes->currentPage() == $clientes->lastPage() ? 'disabled' : '' }}">
+                        <a class="page-link" href="{{ $clientes->nextPageUrl() }}">Siguiente</a>
                     </li>
                 </ul>
             </nav>

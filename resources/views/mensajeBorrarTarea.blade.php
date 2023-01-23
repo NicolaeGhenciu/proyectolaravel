@@ -1,4 +1,4 @@
-@section('titulo', 'Ver Tareas')
+@section('titulo', 'Borrar')
 
 @extends('base')
 
@@ -53,16 +53,6 @@
                 </tbody>
             </table>
         </div>
-
-        {{-- 
-        <div id="centrar">
-            <form action="{{ route('tareas.destroy', $tarea) }}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Borrar</button>
-                <a class="btn btn-success" href="{{ route('tareas.index') }}">Volver atrás</a>
-            </form>
-        </div> --}}
 
         <div id="centrar">
             <form action="{{ route('borrarTarea', $tarea) }}" method="POST">

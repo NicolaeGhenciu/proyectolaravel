@@ -44,9 +44,13 @@
             {!! $errors->first('fecha_alta', '<b style="color: red">:message</b>') !!}
         </div>
         <div class="col-md-3">
-            <label for="correo" class="form-label">Correo:</label>
-            <input class="form-control" type="text" name="correo" value="{{ old('correo') }}"
-                placeholder="Correo Electronico">
+            <label for="correo" class="form-label">Correo electrónico: </label>
+            <div class="input-group">
+                <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                <input class="form-control" type="text" name="correo" placeholder="Correo electrónico"
+                    value="{{ old('correo') }}">
+            </div>
+
             {!! $errors->first('correo', '<b style="color: red">:message</b>') !!}
         </div>
         <div class="col-md-3">
@@ -62,16 +66,21 @@
         </div>
 
         <div class="col-md-3">
-            <label>Rol de la persona:</label> <br>
-            <label for="operario" class="form-label">Operario</label>
-            <input class="form-check-input" type="radio" id="es_admin" name="es_admin" value="0"
-                {{ old('es_admin') == 'operario' ? 'checked' : '' }}>
-            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-            <label for="administrador" class="form-label">Administrador</label>
-            <input class="form-check-input" type="radio" id="es_admin" name="es_admin" value="1"
-                {{ old('es_admin') == 'admin' ? 'checked' : '' }}>
-            {!! $errors->first('es_admin', '<b style="color: red">:message</b>') !!}
+            <label>Rol del empleado:</label>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="operario" name="es_admin" value="0" {{ old('es_admin') == 'operario' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="operario">👨🏻‍🔧 Operario</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="administrador" name="es_admin" value="1" {{ old('es_admin') == 'admin' ? 'checked' : '' }}>
+                    <label class="form-check-label" for="administrador">👨🏻‍💼 Administrador</label>
+                </div>
+                {!! $errors->first('es_admin', '<b style="color: red">:message</b>') !!}
+            </div>
         </div>
+        
+
 
         <div class="col-15">
             <button type="submit" class="btn btn-primary">Enviar</button>
