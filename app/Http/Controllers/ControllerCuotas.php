@@ -8,6 +8,8 @@ use App\Models\Cliente;
 
 use App\Models\Cuota;
 
+use App\Models\Tarea;
+
 class ControllerCuotas extends Controller
 {
     public function formularioInsertar(Request $request)
@@ -18,7 +20,7 @@ class ControllerCuotas extends Controller
 
     public function validarInsertar()
     {
-        $data =request()->validate([
+        $data = request()->validate([
             'clientes_id' => 'required',
             'concepto' => 'required',
             'fecha_emision' => 'required',
@@ -33,5 +35,12 @@ class ControllerCuotas extends Controller
         session()->flash('message', 'La cuota ha sido creada correctamente.');
 
         return redirect()->route('formCuota');
+    }
+
+    public function listar()
+    {
+        $cuotas = Cuota::orderBy('fecha_emision', 'asc')->paginate(10);
+        $tareas = Tarea::all();
+        return view('listaCuotas', compact('cuotas', 'tareas'));
     }
 }

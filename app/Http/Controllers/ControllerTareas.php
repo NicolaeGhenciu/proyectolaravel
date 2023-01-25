@@ -68,4 +68,36 @@ class ControllerTareas extends Controller
         session()->flash('message', 'La tarea ha sido borrada correctamente.');
         return redirect()->route('listaTareas');
     }
+
+    public function forModTarea(Tarea $tarea)
+    {
+        $provincias = Provincia::all();
+        $empleados = Empleado::all();
+        $clientes = Cliente::all();
+        return view('forModTarea', compact('tarea', 'provincias', 'empleados', 'clientes'));
+    }
+
+    public function modificarTarea(Tarea $tarea)
+    {
+        $datos = request()->validate([
+            'cliente' => 'required',
+            'nombre_y_apellidos' => 'required|min:3|max:100',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'correo' => 'required|email',
+            'descripcion' => 'required',
+            'direccion' => 'required',
+            'poblacion' => 'required',
+            'codigo_postal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
+            'provincia' => 'required',
+            'estado' => 'required',
+            'operario_encargado' => 'required',
+            'fecha_realizacion' => 'required',
+            'anotaciones_anteriores' => 'required',
+            'anotaciones_posteriores' => 'required',
+        ]);
+
+        $tarea->update($datos);
+        session()->flash('message', 'La tarea ha sido modificada correctamente.');
+        return redirect()->route('listaTareas');
+    }
 }

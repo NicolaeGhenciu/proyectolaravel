@@ -46,6 +46,8 @@ Route::delete('/borrarCliente/{cliente}', [ControllerClientes::class, 'borrarCli
 Route::get('/formCuota', [ControllerCuotas::class, 'formularioInsertar'])->name('formCuota');
 Route::post('formCuota', [ControllerCuotas::class, 'validarInsertar']);
 
+Route::get('/listaCuotas', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
+
 //Tareas
 
 Route::get('/formTarea', [ControllerTareas::class, 'formularioInsertar'])->name('formTarea');
@@ -58,3 +60,7 @@ Route::get('/detallesTarea/{tarea}', [ControllerTareas::class, 'detallesTarea'])
 Route::get('/mensajeBorrarTarea/{tarea}', [ControllerTareas::class, 'mensajeBorrar'])->name('mensajeBorrarTarea');
 
 Route::delete('/borrarTarea/{tarea}', [ControllerTareas::class, 'borrarTarea'])->name('borrarTarea');
+
+Route::get('/forModTarea/{tarea}', [ControllerTareas::class, 'forModTarea'])->name('forModTarea');
+
+Route::put('/modificarTarea/{tarea}', [ControllerTareas::class, 'modificarTarea'])->name('modificarTarea');

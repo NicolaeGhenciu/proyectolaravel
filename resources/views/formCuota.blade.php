@@ -50,9 +50,9 @@
         <div class="col-md-3">
             <label for="pagada" class="form-label">Pagada: </label>
             <select name="pagada" id="pagada" class="form-select">
-                <option value="no">NO SE</option>
-                <option value="si">SI</option>
-                <option value="no">NO</option>
+                <option value="NO SE">NO SE</option>
+                <option value="SI">SI</option>
+                <option value="NO">NO</option>
             </select>
             {!! $errors->first('pagada', '<b style="color: red">:message</b>') !!}
         </div>

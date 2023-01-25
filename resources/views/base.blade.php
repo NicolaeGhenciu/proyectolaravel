@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>@yield('titulo')</title>
     <style>
         .nav-link.active {
@@ -15,7 +18,43 @@
     </style>
 </head>
 
-<nav class="navbar navbar-expand navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">🏗️ SIEMPRECOLGADOS S.A</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Insertar
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('formRegEmpleado') }}">Empleado</a>
+                    <a class="dropdown-item" href="{{ route('formRegCliente') }}">Cliente</a>
+                    <a class="dropdown-item" href="{{ route('formCuota') }}">Cuota</a>
+                    <a class="dropdown-item" href="{{ route('formTarea') }}">Tarea</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Lista
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('listaTareas') }}">Tareas</a>
+                    <a class="dropdown-item" href="{{ route('listaEmpleados') }}">Empleados</a>
+                    <a class="dropdown-item" href="{{ route('listaClientes') }}">Clientes</a>
+                    <a class="dropdown-item" href="{{ route('listaCuotas') }}">Cuotas</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+{{-- <nav class="navbar navbar-expand navbar-dark bg-dark">
     <div class="nav navbar-nav">
         <b><a class="nav-link active" href="#">🏗️ SIEMPRECOLGADOS S.A</a></b>
         <a class="nav-link {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
@@ -32,8 +71,10 @@
             href="{{ route('listaEmpleados') }}">Lista de Empleados</a>
         <a class="nav-link {{ request()->routeIs('listaClientes') ? 'active' : '' }}"
             href="{{ route('listaClientes') }}">Lista de Clientes</a>
+        <a class="nav-link {{ request()->routeIs('listaCuotas') ? 'active' : '' }}"
+            href="{{ route('listaCuotas') }}">Lista de Cuotas</a>
     </div>
-</nav>
+</nav> --}}
 
 <body>
     @yield('contenido')
