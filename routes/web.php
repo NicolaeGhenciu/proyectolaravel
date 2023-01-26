@@ -19,6 +19,10 @@ use App\Http\Controllers\ControllerCuotas;
 |
 */
 
+Route::get('/siemprecolgados', function () {
+    return view('siemprecolgados');
+})->name('siemprecolgados');
+
 //Empleado
 
 Route::get('/formRegEmpleado', [ControllerEmpleados::class, 'formularioInsertar'])->name('formRegEmpleado');
@@ -29,6 +33,10 @@ Route::get('/listaEmpleados', [ControllerEmpleados::class, 'listar'])->name('lis
 Route::get('/mensajeBorrarEmpleado/{empleado}', [ControllerEmpleados::class, 'mensajeBorrar'])->name('mensajeBorrarEmpleado');
 
 Route::delete('/borrarEmpleado/{empleado}', [ControllerEmpleados::class, 'borrarEmpleado'])->name('borrarEmpleado');
+
+Route::get('/forModEmpleado/{empleado}', [ControllerEmpleados::class, 'forModEmpleado'])->name('forModEmpleado');
+
+Route::put('/modificarEmpleado/{empleado}', [ControllerEmpleados::class, 'modificarEmpleado'])->name('modificarEmpleado');
 
 //Cliente
 
@@ -47,6 +55,10 @@ Route::get('/formCuota', [ControllerCuotas::class, 'formularioInsertar'])->name(
 Route::post('formCuota', [ControllerCuotas::class, 'validarInsertar']);
 
 Route::get('/listaCuotas', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
+
+Route::get('/mensajeBorrarCuota/{cuota}', [ControllerCuotas::class, 'mensajeBorrar'])->name('mensajeBorrarCuota');
+
+Route::delete('/borrarCuota/{cuota}', [ControllerCuotas::class, 'borrarCuota'])->name('borrarCuota');
 
 //Tareas
 

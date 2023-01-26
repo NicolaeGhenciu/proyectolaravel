@@ -43,4 +43,16 @@ class ControllerCuotas extends Controller
         $tareas = Tarea::all();
         return view('listaCuotas', compact('cuotas', 'tareas'));
     }
+
+    public function mensajeBorrar(Cuota $cuota)
+    {
+        return view('mensajeBorrarCuota', compact('cuota'));
+    }
+
+    public function borrarCuota(Cuota $cuota)
+    {
+        $cuota->delete();
+        session()->flash('message', 'La cuota ha sido borrada correctamente.');
+        return redirect()->route('listaCuotas');
+    }
 }

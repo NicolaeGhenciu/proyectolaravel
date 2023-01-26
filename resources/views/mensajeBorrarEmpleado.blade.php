@@ -17,7 +17,7 @@
 @section('contenido')
     <br>
     <div id="centrar">
-        <h2>¿Estas seguro de querer borrar el empleado {{ request('id') }}?</h2>
+        <h2>¿Estas seguro de querer borrar el empleado {{ $empleado->id }}?</h2>
     </div>
 
     <div id="cuerpo">

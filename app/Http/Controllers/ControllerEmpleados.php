@@ -52,4 +52,30 @@ class ControllerEmpleados extends Controller
         session()->flash('message', 'El empleado ha sido borrado correctamente.');
         return redirect()->route('listaEmpleados');
     }
+
+    public function forModEmpleado(Empleado $empleado)
+    {
+        $empleados = Empleado::all();
+        return view('forModEmpleado', compact('empleado'));
+    }
+
+    //_________
+
+    public function modificarEmpleado(Empleado $empleado)
+    {
+        $datos = request()->validate([
+            'nif' => ['required', new DniRule],
+            'nombre_y_apellidos' => 'required|min:3|max:100',
+            'clave' => 'required|min:6|max:15|regex:/^[^,]*$/',
+            'fecha_alta' => 'required',
+            'correo' => 'required|email',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'direccion' => 'required|min:6|max:100',
+            'es_admin' => 'required',
+        ]);
+
+        $empleado->update($datos);
+        session()->flash('message', 'La tarea ha sido modificada correctamente.');
+        return redirect()->route('listaEmpleados');
+    }
 }
