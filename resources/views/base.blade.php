@@ -12,6 +12,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>@yield('titulo')</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Signika Negative', sans-serif;
+        }
+
         .nav-link.active {
             font-size: 20px;
         }
@@ -19,7 +28,7 @@
 </head>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{{ route('siemprecolgados') }}">🏗️ SIEMPRECOLGADOS S.A</a>
+    <a class="navbar-brand" href="{{ route('siemprecolgados') }}">&nbsp;🏗️ SIEMPRECOLGADOS S.A</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

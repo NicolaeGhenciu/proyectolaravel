@@ -19,7 +19,7 @@ class ControllerEmpleados extends Controller
     {
         $datos = request()->validate([
             'nif' => ['required', new DniRule],
-            'nombre_y_apellidos' => 'required|min:3|max:100|regex:/^[^,]*$/',
+            'nombre_y_apellidos' => 'required|min:3|max:100',
             'clave' => 'required|min:6|max:15|regex:/^[^,]*$/',
             'fecha_alta' => 'required',
             'correo' => 'required|email',

@@ -68,9 +68,9 @@
 
         <div class="col-md-3">
             <label for="pais" class="form-label">Paises:</label>
-            <select class="form-select" name="pais">
+            <select class="form-select" name="pais_id">
                 @foreach ($paises as $pais)
-                    <option value="{{ $pais->id }}" {{ old('pais') == $pais->id ? 'selected' : '' }}>
+                    <option value="{{ $pais->id }}" {{ old('pais_id') == $pais->id ? 'selected' : '' }}>
                         {{ $pais->nombre }}</option>
                 @endforeach
             </select>

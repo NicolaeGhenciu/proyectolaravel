@@ -20,11 +20,11 @@
         <h2>Formulario Tarea</h2> <br>
 
         <div class="col-md-3">
-            <label for="cliente" class="form-label"><b>Cliente que encarga del trabajo</b></label>
-            <select class="form-select" name="cliente">
+            <label for="clientes_id" class="form-label"><b>Cliente que encarga del trabajo</b></label>
+            <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->cif }}"
-                        {{ old('cliente') == $cliente->cif ? 'selected' : ($tarea->cliente == $cliente->cif ? 'selected' : '') }}>
+                    <option value="{{ $cliente->id }}"
+                        {{ old('clientes_id') == $cliente->id ? 'selected' : ($tarea->clientes_id == $cliente->id ? 'selected' : '') }}>
                         {{ $cliente->nombre_y_apellidos }}</option>
                 @endforeach
             </select>
@@ -111,14 +111,20 @@
         </div>
 
         <div class="col-md-2">
-            <label for="operario_encargado" class="form-label">Operario encargado: </label>
-            <select class="form-select" name="operario_encargado">
+            <label for="empleados_id" class="form-label">Operario encargado: </label>
+            <select class="form-select" name="empleados_id">
                 @foreach ($empleados as $empleado)
-                    <option value="{{ $empleado->nif }}"
-                        {{ old('operario_encargado') == $empleado->nif || (old('operario_encargado') == null && $tarea->operario_encargado == $empleado->nif) ? 'selected' : '' }}>
+                    <option value="{{ $empleado->id }}"
+                        {{ old('empleados_id') == $empleado->id || (old('empleados_id') == null && $tarea->empleados_id == $empleado->id) ? 'selected' : '' }}>
                         {{ $empleado->nombre_y_apellidos }}</option>
                 @endforeach
             </select>
+        </div>
+
+        <div class="col-md-2">
+            <label for="fecha_creacion" class="form-label">Fecha creación: </label>
+            <span type="text" name="fecha_creacion" class="form-control" id="fecha_creacion"
+                placeholder="fecha_creacion">{{ date('d-m-Y', strtotime($tarea->fechaCreacion)) }}</span>
         </div>
 
         <div class="col-md-2">

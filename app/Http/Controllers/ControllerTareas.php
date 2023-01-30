@@ -23,7 +23,7 @@ class ControllerTareas extends Controller
     public function validarInsertar()
     {
         $datos = request()->validate([
-            'cliente' => 'required',
+            'clientes_id' => 'required',
             'nombre_y_apellidos' => 'required|min:3|max:100|regex:/^[^,]*$/',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'correo' => 'required|email',
@@ -33,7 +33,7 @@ class ControllerTareas extends Controller
             'codigo_postal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
             'provincia' => 'required',
             'estado' => 'required',
-            'operario_encargado' => 'required',
+            'empleados_id' => 'required',
             'fecha_realizacion' => 'required|after:now',
         ]);
 
@@ -90,7 +90,7 @@ class ControllerTareas extends Controller
             'codigo_postal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
             'provincia' => 'required',
             'estado' => 'required',
-            'operario_encargado' => 'required',
+            'empleados_id' => 'required',
             'fecha_realizacion' => 'required',
             'anotaciones_anteriores' => 'required',
             'anotaciones_posteriores' => 'required',

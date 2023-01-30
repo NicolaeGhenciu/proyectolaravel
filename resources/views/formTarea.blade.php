@@ -23,10 +23,10 @@
         @csrf
 
         <div class="col-md-3">
-            <label for="cliente" class="form-label"><b>Cliente que encarga del trabajo</b></label>
-            <select class="form-select" name="cliente">
+            <label for="clientes_id" class="form-label"><b>Cliente que encarga del trabajo</b></label>
+            <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->cif }}" {{ old('cliente') == $cliente->cif ? 'selected' : '' }}>
+                    <option value="{{ $cliente->id }}" {{ old('clientes_id') == $cliente->id ? 'selected' : '' }}>
                         {{ $cliente->nombre_y_apellidos }}</option>
                 @endforeach
             </select>
@@ -91,7 +91,6 @@
             <label class="form-label">Provincia: </label>
             <select class="form-select" name="provincia">
                 @foreach ($provincias as $provincia)
-                    <option value="{{ $provincia->cod }}">{{ $provincia->nombre }}</option>
                     <option value="{{ $provincia->cod }}" {{ old('provincia') == $provincia->cod ? 'selected' : '' }}>
                         {{ $provincia->nombre }}
                     </option>
@@ -111,12 +110,11 @@
         </div>
 
         <div class="col-md-3">
-            <label for="operario_encargado" class="form-label">Operario encargado: </label>
-            <select class="form-select" name="operario_encargado">
+            <label for="empleados_id" class="form-label">Operario encargado: </label>
+            <select class="form-select" name="empleados_id">
                 @foreach ($empleados as $empleado)
                     @if ($empleado->es_admin == 0)
-                        <option value="{{ $empleado->nif }}"
-                            {{ old('operario_encargado') == $empleado->nif ? 'selected' : '' }}>
+                        <option value="{{ $empleado->id }}" {{ old('empleados_id') == $empleado->id ? 'selected' : '' }}>
                             {{ $empleado->nombre_y_apellidos }}
                         </option>
                     @endif

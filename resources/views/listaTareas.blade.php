@@ -50,11 +50,23 @@
                     @foreach ($tareas as $tarea)
                         <tr>
                             <td>{{ $tarea->id }}</td>
-                            <td>{{ $tarea->cliente }}</td>
+                            <td>
+                                @if ($tarea->cliente)
+                                    {{ $tarea->cliente->cif }}
+                                @else
+                                    Cliente dado de baja
+                                @endif
+                            </td>
                             <td>{{ $tarea->nombre_y_apellidos }}</td>
                             <td>{{ $tarea->direccion }}</td>
                             <td>{{ $tarea->poblacion }}</td>
-                            <td>{{ $tarea->operario_encargado }}</td>
+                            <td>
+                                @if ($tarea->empleado)
+                                    {{ $tarea->empleado->nif }}
+                                @else
+                                    Empleado dado de baja
+                                @endif
+                            </td>
                             <td>{{ date('d-m-Y', strtotime($tarea->fecha_realizacion)) }}</td>
                             <td><a class="btn btn-info" href="{{ route('detallesTarea', $tarea) }}"
                                     title="Ver detalles"><svg xmlns="http://www.w3.org/2000/svg" width="16"

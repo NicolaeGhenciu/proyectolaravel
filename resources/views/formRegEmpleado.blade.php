@@ -69,18 +69,18 @@
             <label>Rol del empleado:</label>
             <div class="form-group">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="operario" name="es_admin" value="0" {{ old('es_admin') == 'operario' ? 'checked' : '' }}>
+                    <input class="form-check-input" type="radio" id="operario" name="es_admin" value="0"
+                        {{ old('es_admin') == '0' ? 'checked' : '' }}>
                     <label class="form-check-label" for="operario">👨🏻‍🔧 Operario</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" id="administrador" name="es_admin" value="1" {{ old('es_admin') == 'admin' ? 'checked' : '' }}>
+                    <input class="form-check-input" type="radio" id="administrador" name="es_admin" value="1"
+                        {{ old('es_admin') == '1' ? 'checked' : '' }}>
                     <label class="form-check-label" for="administrador">👨🏻‍💼 Administrador</label>
                 </div>
                 {!! $errors->first('es_admin', '<b style="color: red">:message</b>') !!}
             </div>
         </div>
-        
-
 
         <div class="col-15">
             <button type="submit" class="btn btn-primary">Enviar</button>

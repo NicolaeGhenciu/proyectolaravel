@@ -9,5 +9,20 @@ class Tarea extends Model
 {
     protected $table = 'tareas';
     public $timestamps = false;
-    protected $fillable = ['cliente', 'nombre_y_apellidos', 'telefono', 'correo', 'descripcion', 'direccion', 'poblacion', 'codigo_postal', 'provincia', 'estado', 'operario_encargado','fecha_creacion', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'fichero'];
+    protected $fillable = ['clientes_id', 'nombre_y_apellidos', 'telefono', 'correo', 'descripcion', 'direccion', 'poblacion', 'codigo_postal', 'provincia', 'estado', 'empleados_id', 'fecha_creacion', 'fecha_realizacion', 'anotaciones_anteriores', 'anotaciones_posteriores', 'fichero'];
+
+    public function provincia()
+    {
+        return $this->belongsTo(Provincia::class);
+    }
+
+    public function cliente()
+    {
+        return $this->belongsTo('App\Models\Cliente', 'clientes_id');
+    }
+
+    public function empleado()
+    {
+        return $this->belongsTo('App\Models\Empleado', 'empleados_id');
+    }
 }

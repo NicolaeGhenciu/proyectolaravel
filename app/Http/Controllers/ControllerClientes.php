@@ -29,7 +29,7 @@ class ControllerClientes extends Controller
             'correo' => 'required|email',
             'cuenta_corriente' => 'required|regex:/^[A-Z]{2}[0-9]{2}[A-Z0-9]{1,30}$/',
             'importe_cuota_mensual' => 'required|regex:/^[0-9]+(\.[0-9]+)?$/',
-            'pais' => 'required',
+            'pais_id' => 'required',
             'moneda' => 'required',
         ]);
 
@@ -44,7 +44,7 @@ class ControllerClientes extends Controller
     {
         $clientes = Cliente::orderBy('id', 'desc')->paginate(10);
         $paises = Pais::all();
-        return view('listaClientes', compact('clientes','paises'));
+        return view('listaClientes', compact('clientes', 'paises'));
     }
 
     public function mensajeBorrar(Cliente $cliente)
