@@ -56,6 +56,10 @@ Route::post('formCuota', [ControllerCuotas::class, 'validarInsertar']);
 
 Route::get('/listaCuotas', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
 
+Route::get('/forModCuota/{cuota}', [ControllerCuotas::class, 'forModCuota'])->name('forModCuota');
+
+Route::put('/modificarCuota/{cuota}', [ControllerCuotas::class, 'modificarCuota'])->name('modificarCuota');
+
 Route::get('/mensajeBorrarCuota/{cuota}', [ControllerCuotas::class, 'mensajeBorrar'])->name('mensajeBorrarCuota');
 
 Route::delete('/borrarCuota/{cuota}', [ControllerCuotas::class, 'borrarCuota'])->name('borrarCuota');

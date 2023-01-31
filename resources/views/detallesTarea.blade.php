@@ -34,7 +34,6 @@
                         Cliente dado de baja
                     @endif
                 </td>
-
             </tr>
             <tr>
                 <th class="col-md-2">Nombre y Apellidos</th>
@@ -66,11 +65,28 @@
             </tr>
             <tr>
                 <th class="col-md-2">Provincia</th>
-                <td class="col-md-4">{{ $tarea->provincia }}</td>
+                <td class="col-md-4">{{ $tarea->provincia->nombre }}</td>
             </tr>
             <tr>
                 <th class="col-md-2">Estado de la tarea</th>
-                <td class="col-md-4">{{ $tarea->estado }}</td>
+                <td class="col-md-4">
+                    @switch($tarea->estado)
+                        @case('P')
+                            Pendiente
+                        @break
+
+                        @case('R')
+                            Realizada
+                        @break
+
+                        @case('C')
+                            Cancelada
+                        @break
+
+                        @default
+                            {{ $tarea->estado }}
+                    @endswitch
+                </td>
             </tr>
             <tr>
                 <th class="col-md-2">Operario encargado</th>

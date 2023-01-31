@@ -20,10 +20,6 @@
             box-sizing: border-box;
             font-family: 'Signika Negative', sans-serif;
         }
-
-        .nav-link.active {
-            font-size: 20px;
-        }
     </style>
 </head>
 
@@ -41,10 +37,14 @@
                     Insertar
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('formRegEmpleado') }}">Empleado</a>
-                    <a class="dropdown-item" href="{{ route('formRegCliente') }}">Cliente</a>
-                    <a class="dropdown-item" href="{{ route('formCuota') }}">Cuota</a>
-                    <a class="dropdown-item" href="{{ route('formTarea') }}">Tarea</a>
+                    <a class="dropdown-item {{ request()->routeIs('formTarea') ? 'active' : '' }}"
+                        href="{{ route('formTarea') }}">Tarea</a>
+                    <a class="dropdown-item {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
+                        href="{{ route('formRegEmpleado') }}">Empleado</a>
+                    <a class="dropdown-item {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
+                        href="{{ route('formRegCliente') }}">Cliente</a>
+                    <a class="dropdown-item {{ request()->routeIs('formCuota') ? 'active' : '' }}"
+                        href="{{ route('formCuota') }}">Cuota</a>
                 </div>
             </li>
             <li class="nav-item dropdown">

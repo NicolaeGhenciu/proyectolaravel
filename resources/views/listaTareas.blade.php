@@ -39,8 +39,7 @@
                         <th scope="col">Id</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Nombre y Apellidos</th>
-                        <th scope="col">Dirección</th>
-                        <th scope="col">Población</th>
+                        <th scope="col">Provincia</th>
                         <th scope="col">Operario Encargado</th>
                         <th scope="col">Fecha de realización</th>
                         <th scope="col">Opciones</th>
@@ -58,8 +57,7 @@
                                 @endif
                             </td>
                             <td>{{ $tarea->nombre_y_apellidos }}</td>
-                            <td>{{ $tarea->direccion }}</td>
-                            <td>{{ $tarea->poblacion }}</td>
+                            <td>{{ $tarea->provincia->nombre }}</td>
                             <td>
                                 @if ($tarea->empleado)
                                     {{ $tarea->empleado->nif }}

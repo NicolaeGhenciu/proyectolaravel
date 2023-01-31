@@ -55,4 +55,27 @@ class ControllerCuotas extends Controller
         session()->flash('message', 'La cuota ha sido borrada correctamente.');
         return redirect()->route('listaCuotas');
     }
+
+    public function forModCuota(Cuota $cuota)
+    {
+        $clientes = Cliente::all();
+        return view('forModCuota', compact('cuota', 'clientes'));
+    }
+
+    public function modificarCuota(Cuota $cuota)
+    {
+        $datos = request()->validate([
+            'clientes_id' => 'required',
+            'concepto' => 'required',
+            'fecha_emision' => 'required',
+            'importe' => 'required',
+            'pagada' => 'required',
+            'fecha_pago' => 'required',
+            'notas' => 'required',
+        ]);
+
+        $cuota->update($datos);
+        session()->flash('message', 'La cuota ha sido modificada correctamente.');
+        return redirect()->route('listaCuotas');
+    }
 }

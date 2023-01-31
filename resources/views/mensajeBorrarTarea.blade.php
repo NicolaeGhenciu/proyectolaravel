@@ -17,7 +17,7 @@
 @section('contenido')
     <br>
     <div id="centrar">
-        <h2>¿Estas seguro de querer borrar la tarea {{ request('id') }}?</h2>
+        <h2>¿Estas seguro de querer borrar la tarea {{ $tarea->id }}?</h2>
     </div>
 
     <div id="cuerpo">
@@ -39,15 +39,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ $tarea->cliente }}</td>
+                        <td>{{ $tarea->cliente->cif }}</td>
                         <td>{{ $tarea->nombre_y_apellidos }}</td>
                         <td>{{ $tarea->telefono }}</td>
                         <td>{{ $tarea->descripcion }}</td>
                         <td>{{ $tarea->direccion }}</td>
                         <td>{{ $tarea->poblacion }}</td>
                         <td>{{ $tarea->codigo_postal }}</td>
-                        <td>{{ $tarea->provincia }}</td>
-                        <td>{{ $tarea->operario_encargado }}</td>
+                        <td>{{ $tarea->provincia->nombre }}</td>
+                        <td>{{ $tarea->empleado->nif }}</td>
                         <td>{{ date('d-m-Y', strtotime($tarea->fecha_realizacion)) }}</td>
                     </tr>
                 </tbody>
@@ -58,8 +58,16 @@
             <form action="{{ route('borrarTarea', $tarea) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Borrar</button>
-                <a class="btn btn-success" href="{{ route('listaTareas') }}">Volver atras</a>
+                <button type="submit" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+                    </svg> Borrar</button>
+                <a class="btn btn-success" href="{{ route('listaTareas') }}"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                    </svg> Volver atras</a>
             </form>
         </div>
 

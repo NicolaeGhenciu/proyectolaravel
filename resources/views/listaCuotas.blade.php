@@ -64,7 +64,7 @@
                             <td>{{ $cuota->pagada }}</td>
                             <td>{{ date('d-m-Y', strtotime($cuota->fecha_pago)) }}</td>
                             <td>{{ $cuota->notas }}</td>
-                            <td><a class="btn btn-warning" href="#" title="Modificar"><svg
+                            <td><a class="btn btn-warning" href="{{ route('forModCuota', $cuota) }}" title="Modificar"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path

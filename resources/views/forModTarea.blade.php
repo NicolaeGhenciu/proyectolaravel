@@ -9,15 +9,11 @@
         }
     </style>
 
-    <div id="encabezado">
-
-    </div>
-
     <form action="{{ route('modificarTarea', $tarea) }}" method="post" class="row g-3" id="formulario">
         @csrf
         @method('PUT')
 
-        <h2>Formulario Tarea</h2> <br>
+        <h2>Modificar tarea {{ $tarea->id }}</h2> <br>
 
         <div class="col-md-3">
             <label for="clientes_id" class="form-label"><b>Cliente que encarga del trabajo</b></label>
@@ -84,11 +80,11 @@
         </div>
 
         <div class="col-md-2">
-            <label for="provincia" class="form-label">Provincia: </label>
-            <select class="form-select" name="provincia">
+            <label for="provincias_cod" class="form-label">Provincia: </label>
+            <select class="form-select" name="provincias_cod">
                 @foreach ($provincias as $provincia)
                     <option value="{{ $provincia->cod }}"
-                        {{ old('provincia') == $provincia->cod ? 'selected' : ($tarea->provincia == $provincia->cod ? 'selected' : '') }}>
+                        {{ old('provincias_cod') == $provincia->cod ? 'selected' : ($tarea->provincia->cod == $provincia->cod ? 'selected' : '') }}>
                         {{ $provincia->nombre }}</option>
                 @endforeach
             </select>
@@ -97,15 +93,12 @@
         <div class="col-md-2">
             <label for="estado" class="form-label">Estado: </label>
             <select class="form-select" name="estado">
-                <option value="pendiente"
-                    {{ old('estado') == 'pendiente' ? 'selected' : ($tarea->estado == 'pendiente' ? 'selected' : '') }}>
+                <option value="P" {{ old('estado') == 'P' ? 'selected' : ($tarea->estado == 'P' ? 'selected' : '') }}>
                     Pendiente</option>
-                <option value="en_progreso"
-                    {{ old('estado') == 'en_progreso' ? 'selected' : ($tarea->estado == 'en_progreso' ? 'selected' : '') }}>
-                    En progreso</option>
-                <option value="completada"
-                    {{ old('estado') == 'completada' ? 'selected' : ($tarea->estado == 'completada' ? 'selected' : '') }}>
-                    Completada</option>
+                <option value="R" {{ old('estado') == 'R' ? 'selected' : ($tarea->estado == 'R' ? 'selected' : '') }}>
+                    Realizada</option>
+                <option value="C" {{ old('estado') == 'C' ? 'selected' : ($tarea->estado == 'C' ? 'selected' : '') }}>
+                    Cancelada</option>
             </select>
             {!! $errors->first('estado', '<b style="color: red">:message</b>') !!}
         </div>
@@ -120,11 +113,10 @@
                 @endforeach
             </select>
         </div>
-
         <div class="col-md-2">
             <label for="fecha_creacion" class="form-label">Fecha creación: </label>
             <span type="text" name="fecha_creacion" class="form-control" id="fecha_creacion"
-                placeholder="fecha_creacion">{{ date('d-m-Y', strtotime($tarea->fechaCreacion)) }}</span>
+                placeholder="fecha_creacion">{{ date('d-m-Y', strtotime($tarea->fecha_creacion)) }}</span>
         </div>
 
         <div class="col-md-2">
@@ -153,7 +145,16 @@
         </div>
 
         <div class="col-15">
-            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a class="btn btn-success" href="{{ route('listaTareas') }}"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg> Volver atras</a>
+            <button type="submit" class="btn btn-primary">Enviar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg></button>
         </div>
 
     </form>
