@@ -60,10 +60,10 @@
         </div>
 
         <div class="col-md-3">
-            <label for="importe_cuota_mensual" class="form-label">Importe cuota mensual:</label>
-            <input class="form-control" type="text" name="importe_cuota_mensual"
-                value="{{ old('importe_cuota_mensual') }}" placeholder="Importe cuota mensual">
-            {!! $errors->first('importe_cuota_mensual', '<b style="color: red">:message</b>') !!}
+            <label for="cuota_mensual" class="form-label">Importe cuota mensual:</label>
+            <input class="form-control" type="text" name="cuota_mensual"
+                value="{{ old('cuota_mensual') }}" placeholder="Importe cuota mensual">
+            {!! $errors->first('cuota_mensual', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">

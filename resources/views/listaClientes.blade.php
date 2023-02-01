@@ -57,7 +57,7 @@
                             <td>{{ $cliente->telefono }}</td>
                             <td>{{ $cliente->correo }}</td>
                             <td>{{ $cliente->cuenta_corriente }}</td>
-                            <td>{{ $cliente->importe_cuota_mensual }}</td>
+                            <td>{{ $cliente->cuota_mensual }}</td>
                             <td>{{ $cliente->pais->iso3 }}</td>
                             <td>{{ $cliente->moneda }}</td>
                             <td>{{-- <a class="btn btn-warning" href="#" title="Modificar"><svg

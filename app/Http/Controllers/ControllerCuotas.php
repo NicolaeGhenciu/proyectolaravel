@@ -12,21 +12,51 @@ use App\Models\Tarea;
 
 class ControllerCuotas extends Controller
 {
-    public function formularioInsertar(Request $request)
+
+    //formulario Remesa Mensual
+
+    public function formularioRemesa(Request $request)
     {
         $clientes = Cliente::all();
-        return view('formCuota', compact('clientes'));
+        return view('formRemesaMensual', compact('clientes'));
     }
 
-    public function validarInsertar()
+    public function validarInsertarRemesa()
+    {
+        $data = request()->validate([
+            'concepto' => 'required',
+            'fecha_emision' => 'required|after:now',
+            'notas' => 'required',
+        ]);
+
+        $clientes = Cliente::all();
+
+        foreach ($clientes as $cliente) {
+            $data['clientes_id'] = $cliente->id;
+            $data['importe'] = $cliente->cuota_mensual;
+            Cuota::create($data);
+        }
+
+        session()->flash('message', 'La cuota ha sido creada correctamente.');
+
+        return redirect()->route('formRemesaMensual');
+    }
+
+    //Formulario Cuota Excepcional
+
+    public function formularioCuota(Request $request)
+    {
+        $clientes = Cliente::all();
+        return view('formCuotaExcepcional', compact('clientes'));
+    }
+
+    public function validarCuotaExcepcional()
     {
         $data = request()->validate([
             'clientes_id' => 'required',
             'concepto' => 'required',
-            'fecha_emision' => 'required',
+            'fecha_emision' => 'required|after:now',
             'importe' => 'required',
-            'pagada' => 'required',
-            'fecha_pago' => 'required',
             'notas' => 'required',
         ]);
 
@@ -34,15 +64,32 @@ class ControllerCuotas extends Controller
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
 
-        return redirect()->route('formCuota');
+        return redirect()->route('formularioCuota');
     }
 
-    public function listar()
+    //Listar Cuotas
+
+    public function listar($filtro = "")
     {
-        $cuotas = Cuota::orderBy('fecha_emision', 'asc')->paginate(10);
         $tareas = Tarea::all();
+        switch ($filtro) {
+            case "NO":
+                $cuotas = Cuota::where('pagada', 'NO')->orderBy('fecha_emision', 'asc')->paginate(10);
+                break;
+            case "SI":
+                $cuotas = Cuota::where('pagada', 'SI')->orderBy('fecha_emision', 'asc')->paginate(10);
+                break;
+            case "fecha_pago":
+                $cuotas = Cuota::orderBy('fecha_pago', 'desc')->paginate(10);
+                break;
+            default:
+                $cuotas = Cuota::orderBy('fecha_emision', 'desc')->paginate(10);
+                break;
+        }
         return view('listaCuotas', compact('cuotas', 'tareas'));
     }
+
+    //Borrar Cuota
 
     public function mensajeBorrar(Cuota $cuota)
     {
@@ -53,8 +100,11 @@ class ControllerCuotas extends Controller
     {
         $cuota->delete();
         session()->flash('message', 'La cuota ha sido borrada correctamente.');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas', 'fecha_emision');
     }
+
+
+    //Modificar Cuota
 
     public function forModCuota(Cuota $cuota)
     {
@@ -76,6 +126,6 @@ class ControllerCuotas extends Controller
 
         $cuota->update($datos);
         session()->flash('message', 'La cuota ha sido modificada correctamente.');
-        return redirect()->route('listaCuotas');
+        return redirect()->route('listaCuotas', 'fecha_emision');
     }
 }

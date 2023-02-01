@@ -51,10 +51,15 @@ Route::delete('/borrarCliente/{cliente}', [ControllerClientes::class, 'borrarCli
 
 //Cuotas
 
-Route::get('/formCuota', [ControllerCuotas::class, 'formularioInsertar'])->name('formCuota');
-Route::post('formCuota', [ControllerCuotas::class, 'validarInsertar']);
+Route::get('/formRemesaMensual', [ControllerCuotas::class, 'formularioRemesa'])->name('formRemesaMensual');
 
-Route::get('/listaCuotas', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
+Route::post('formRemesaMensual', [ControllerCuotas::class, 'validarInsertarRemesa']);
+
+Route::get('/formularioCuota', [ControllerCuotas::class, 'formularioCuota'])->name('formularioCuota');
+
+Route::post('formularioCuota', [ControllerCuotas::class, 'validarCuotaExcepcional']);
+
+Route::get('/listaCuotas/{filtro}', [ControllerCuotas::class, 'listar'])->name('listaCuotas');
 
 Route::get('/forModCuota/{cuota}', [ControllerCuotas::class, 'forModCuota'])->name('forModCuota');
 

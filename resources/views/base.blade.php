@@ -10,6 +10,9 @@
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    @yield('linkScript')
+
     <title>@yield('titulo')</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Signika+Negative&display=swap');
@@ -43,20 +46,26 @@
                         href="{{ route('formRegEmpleado') }}">Empleado</a>
                     <a class="dropdown-item {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
                         href="{{ route('formRegCliente') }}">Cliente</a>
-                    <a class="dropdown-item {{ request()->routeIs('formCuota') ? 'active' : '' }}"
-                        href="{{ route('formCuota') }}">Cuota</a>
+                    <a class="dropdown-item {{ request()->routeIs('formularioCuota') ? 'active' : '' }}"
+                        href="{{ route('formularioCuota') }}">Cuota excepcional</a>
+                    <a class="dropdown-item {{ request()->routeIs('formRemesaMensual') ? 'active' : '' }}"
+                        href="{{ route('formRemesaMensual') }}">Remesa mensual</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Lista
+                    Listar
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ route('listaTareas') }}">Tareas</a>
-                    <a class="dropdown-item" href="{{ route('listaEmpleados') }}">Empleados</a>
-                    <a class="dropdown-item" href="{{ route('listaClientes') }}">Clientes</a>
-                    <a class="dropdown-item" href="{{ route('listaCuotas') }}">Cuotas</a>
+                    <a class="dropdown-item {{ request()->routeIs('listaTareas') ? 'active' : '' }}"
+                        href="{{ route('listaTareas') }}">Tareas</a>
+                    <a class="dropdown-item {{ request()->routeIs('listaEmpleados') ? 'active' : '' }}"
+                        href="{{ route('listaEmpleados') }}">Empleados</a>
+                    <a class="dropdown-item {{ request()->routeIs('listaClientes') ? 'active' : '' }}"
+                        href="{{ route('listaClientes') }}">Clientes</a>
+                    <a class="dropdown-item {{ request()->routeIs('listaCuotas') ? 'active' : '' }}"
+                        href="{{ route('listaCuotas', 'fecha_emision') }}">Cuotas</a>
                 </div>
             </li>
         </ul>

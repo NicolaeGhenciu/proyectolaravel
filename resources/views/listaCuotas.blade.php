@@ -22,6 +22,18 @@
 
 @section('contenido')
 
+    <br>
+
+    <div class="d-flex flex-column align-items-center w-50 mx-auto">
+        <h4 class="text-center">Filtar por:</h4>
+        <div class="d-flex justify-content-center">
+            <a class="btn btn-outline-dark" href="{{ route('listaCuotas', ['fecha_emision']) }}">Fecha de emisión</a>&nbsp;
+            <a class="btn btn-outline-dark" href="{{ route('listaCuotas', ['fecha_pago']) }}">Fecha de pago</a>&nbsp;
+            <a class="btn btn-outline-dark" href="{{ route('listaCuotas', ['SI']) }}">Pagadas</a>&nbsp;
+            <a class="btn btn-outline-dark" href="{{ route('listaCuotas', ['NO']) }}">NO pagadas</a>&nbsp;
+        </div>
+    </div>
+
     <div id="cuerpo">
 
         <h3 id="centrar">Lista de cuotas</h3>
@@ -59,10 +71,18 @@
                                 @endif
                             </td>
                             <td>{{ $cuota->concepto }}</td>
-                            <td>{{ date('d-m-Y', strtotime($cuota->fecha_emision)) }}</td>
-                            <td>{{ $cuota->importe }}</td>
+                            <td>
+                                @if ($cuota->fecha_emision)
+                                    {{ date('d-m-Y', strtotime($cuota->fecha_emision)) }}
+                                @endif
+                            </td>
+                            <td>{{ $cuota->importe }} €</td>
                             <td>{{ $cuota->pagada }}</td>
-                            <td>{{ date('d-m-Y', strtotime($cuota->fecha_pago)) }}</td>
+                            <td>
+                                @if ($cuota->fecha_pago)
+                                    {{ date('d-m-Y', strtotime($cuota->fecha_pago)) }}
+                                @endif
+                            </td>
                             <td>{{ $cuota->notas }}</td>
                             <td><a class="btn btn-warning" href="{{ route('forModCuota', $cuota) }}" title="Modificar"><svg
                                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

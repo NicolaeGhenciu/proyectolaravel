@@ -107,9 +107,11 @@
             <label for="empleados_id" class="form-label">Operario encargado: </label>
             <select class="form-select" name="empleados_id">
                 @foreach ($empleados as $empleado)
-                    <option value="{{ $empleado->id }}"
-                        {{ old('empleados_id') == $empleado->id || (old('empleados_id') == null && $tarea->empleados_id == $empleado->id) ? 'selected' : '' }}>
-                        {{ $empleado->nombre_y_apellidos }}</option>
+                    @if ($empleado->es_admin == 0)
+                        <option value="{{ $empleado->id }}"
+                            {{ old('empleados_id') == $empleado->id || (old('empleados_id') == null && $tarea->empleados_id == $empleado->id) ? 'selected' : '' }}>
+                            {{ $empleado->nombre_y_apellidos }}</option>
+                    @endif
                 @endforeach
             </select>
         </div>

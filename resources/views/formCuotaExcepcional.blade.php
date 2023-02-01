@@ -1,5 +1,17 @@
 @section('titulo', 'Formulario Mantenimiento')
 
+@section('linkScript')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
+
+@endsection
+
 @extends('base')
 
 @section('contenido')
@@ -11,7 +23,7 @@
     </style>
 
     <div id="encabezado">
-        <h2>Formulario Cuota</h2> <br>
+        <h2>Formulario cuota excepcional</h2> <br>
         @if (session()->has('message'))
             <div class="alert alert-success">
                 {{ session()->get('message') }}
@@ -19,10 +31,21 @@
         @endif
     </div>
 
-    <form action="{{ route('formCuota') }}" method="post" class="row g-3 needs-validation" id="formulario">
+    <form action="{{ route('formularioCuota') }}" method="post" class="row g-3 needs-validation" id="formulario">
         @csrf
 
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
+            <label class="form-label">Cliente: </label>
+            <select class="form-select" name="clientes_id">
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id }}" {{ old('clientes_id') == $cliente->id ? 'selected' : '' }}>
+                        {{ $cliente->nombre_y_apellidos }}
+                    </option>
+                @endforeach
+            </select>
+        </div> --}}
+
+        <div class="col-2 md-3">
             <label class="form-label">Cliente: </label>
             <select class="form-select" name="clientes_id">
                 @foreach ($clientes as $cliente)
@@ -51,7 +74,7 @@
             {!! $errors->first('concepto', '<b style="color: red">:message</b>') !!}
         </div>
 
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <label for="pagada" class="form-label">Pagada: </label>
             <select name="pagada" id="pagada" class="form-select">
                 <option value="SI">SI</option>
@@ -64,7 +87,7 @@
             <label for="fecha_pago" class="form-label">Fecha de pago: </label>
             <input type="date" name="fecha_pago" class="form-control" value="{{ old('fecha_pago') }}">
             {!! $errors->first('fecha_pago', '<b style="color: red">:message</b>') !!}
-        </div>
+        </div> --}}
 
         <div class="col-md-3">
             <label for="notas" class="form-label">Notas: </label>
@@ -73,9 +96,11 @@
         </div>
 
         <div class="col-15">
-            <button type="submit" class="btn btn-primary">Enviar <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-              </svg></button>
+            <button type="submit" class="btn btn-primary">Enviar <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                    height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+                </svg></button>
         </div>
 
     </form>
