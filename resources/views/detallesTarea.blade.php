@@ -115,7 +115,12 @@
             </tr>
             <tr>
                 <th class="col-md-2">Fichero</th>
-                <td class="col-md-4">{{ $tarea->fichero }}</td>
+                <td class="col-md-4">
+                    @if ($tarea->fichero_resumen)
+                        <a class="btn btn-info" href="{{ Storage::url('public/files/' . $tarea->fichero_resumen) }}"
+                            download="{{ basename($tarea->fichero_resumen) }}">Descargar</a>
+                    @endif
+                </td>
             </tr>
         </table>
 

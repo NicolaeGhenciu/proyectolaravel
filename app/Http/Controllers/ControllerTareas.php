@@ -94,7 +94,17 @@ class ControllerTareas extends Controller
             'fecha_realizacion' => 'required',
             'anotaciones_anteriores' => '',
             'anotaciones_posteriores' => '',
+            'fichero_resumen' => 'file'
         ]);
+
+        if (request()->hasFile('fichero_resumen')) {
+
+            $fichero_resumen = request()->file('fichero_resumen');
+            $nombre_fichero = $fichero_resumen->getClientOriginalName();
+            $path = $fichero_resumen->storeAs('public/files', $nombre_fichero);
+
+            $datos['fichero_resumen'] = $nombre_fichero;
+        }
 
         $tarea->update($datos);
         session()->flash('message', 'La tarea ha sido modificada correctamente.');

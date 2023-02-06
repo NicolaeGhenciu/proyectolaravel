@@ -85,3 +85,9 @@ Route::delete('/borrarTarea/{tarea}', [ControllerTareas::class, 'borrarTarea'])-
 Route::get('/forModTarea/{tarea}', [ControllerTareas::class, 'forModTarea'])->name('forModTarea');
 
 Route::put('/modificarTarea/{tarea}', [ControllerTareas::class, 'modificarTarea'])->name('modificarTarea');
+
+//Login
+
+Route::get('/', function () {
+    return view('login');
+});

@@ -2,6 +2,19 @@
 
 @extends('base')
 
+@section('linkScript')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
+
+@endsection
+
+
 @section('contenido')
     <style>
         #formulario {
@@ -9,7 +22,8 @@
         }
     </style>
 
-    <form action="{{ route('modificarTarea', $tarea) }}" method="post" class="row g-3" id="formulario">
+    <form action="{{ route('modificarTarea', $tarea) }}" method="post" enctype="multipart/form-data" class="row g-3"
+        id="formulario">
         @csrf
         @method('PUT')
 
@@ -143,9 +157,11 @@
 
         <div class="col-md-2">
             <label for="fichero_resumen" class="form-label">Fichero resumen: </label>
-            <input class="form-control" name="fichero_resumen" type="file" value="{{ $tarea->fichero_resumen }}">
+            <input class="form-control" name="fichero_resumen" type="file">
+            {!! $errors->first('fichero_resumen', '<b style="color: red">:message</b>') !!}
         </div>
 
+        {{-- {{ $tarea->fichero_resumen }} --}}
         <div class="col-15">
             <a class="btn btn-success" href="{{ route('listaTareas') }}"><svg xmlns="http://www.w3.org/2000/svg"
                     width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">

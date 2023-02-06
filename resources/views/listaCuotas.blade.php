@@ -77,7 +77,7 @@
                                 @endif
                             </td>
                             <td>{{ $cuota->importe }} €</td>
-                            <td>{{ $cuota->pagada }}</td>
+                            <td>{{ $cuota->pagada == 'SI' ? '✅' : '❌' }}</td>
                             <td>
                                 @if ($cuota->fecha_pago)
                                     {{ date('d-m-Y', strtotime($cuota->fecha_pago)) }}

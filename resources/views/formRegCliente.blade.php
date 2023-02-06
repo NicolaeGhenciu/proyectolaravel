@@ -2,6 +2,19 @@
 
 @extends('base')
 
+@section('linkScript')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.form-select').select2();
+        });
+    </script>
+
+@endsection
+
+
 @section('contenido')
     <style>
         #formulario,
@@ -61,8 +74,8 @@
 
         <div class="col-md-3">
             <label for="cuota_mensual" class="form-label">Importe cuota mensual:</label>
-            <input class="form-control" type="text" name="cuota_mensual"
-                value="{{ old('cuota_mensual') }}" placeholder="Importe cuota mensual">
+            <input class="form-control" type="text" name="cuota_mensual" value="{{ old('cuota_mensual') }}"
+                placeholder="Importe cuota mensual">
             {!! $errors->first('cuota_mensual', '<b style="color: red">:message</b>') !!}
         </div>
 
