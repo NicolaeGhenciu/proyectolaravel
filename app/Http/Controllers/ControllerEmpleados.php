@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 
 use App\Rules\DniRule;
 
@@ -20,13 +22,15 @@ class ControllerEmpleados extends Controller
         $datos = request()->validate([
             'nif' => ['required', new DniRule],
             'nombre_y_apellidos' => 'required|min:3|max:100',
-            'clave' => 'required|min:6|max:15|regex:/^[^,]*$/',
+            'password' => 'required|min:6|max:15|regex:/^[^,]*$/',
             'fecha_alta' => 'required',
-            'correo' => 'required|email',
+            'email' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'direccion' => 'required|min:6|max:100',
             'es_admin' => 'required',
         ]);
+
+        $datos['password'] = Hash::make($datos['password']);
 
         Empleado::create($datos);
 
@@ -66,13 +70,15 @@ class ControllerEmpleados extends Controller
         $datos = request()->validate([
             'nif' => ['required', new DniRule],
             'nombre_y_apellidos' => 'required|min:3|max:100',
-            'clave' => 'required|min:6|max:15|regex:/^[^,]*$/',
+            'password' => 'required|min:6|max:15|regex:/^[^,]*$/',
             'fecha_alta' => 'required',
-            'correo' => 'required|email',
+            'email' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
             'direccion' => 'required|min:6|max:100',
             'es_admin' => 'required',
         ]);
+
+        $datos['password'] = Hash::make($datos['password']);
 
         $empleado->update($datos);
         session()->flash('message', 'La tarea ha sido modificada correctamente.');

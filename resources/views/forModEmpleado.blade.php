@@ -31,10 +31,10 @@
         </div>
 
         <div class="col-md-3">
-            <label for="clave" class="form-label">Contraseña:</label>
-            <input class="form-control" type="text" name="clave" value="{{ old('clave') ?? $empleado->clave }}"
-                placeholder="Clave">
-            {!! $errors->first('clave', '<b style="color: red">:message</b>') !!}
+            <label for="password" class="form-label">Contraseña:</label>
+            <input class="form-control" type="text" name="password" value="{{ old('password') ?? $empleado->password }}"
+                placeholder="Contraseña">
+            {!! $errors->first('password', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">
@@ -45,14 +45,14 @@
         </div>
 
         <div class="col-md-3">
-            <label for="correo" class="form-label">Correo electrónico: </label>
+            <label for="email" class="form-label">Correo electrónico: </label>
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                <input class="form-control" type="text" name="correo" placeholder="Correo electrónico"
-                    value="{{ old('correo') ?? $empleado->correo }}">
+                <input class="form-control" type="text" name="email" placeholder="Correo electrónico"
+                    value="{{ old('email') ?? $empleado->email }}">
             </div>
 
-            {!! $errors->first('correo', '<b style="color: red">:message</b>') !!}
+            {!! $errors->first('email', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">
@@ -88,10 +88,10 @@
 
         <div class="col-15">
             <a class="btn btn-success" href="{{ route('listaEmpleados') }}"><svg xmlns="http://www.w3.org/2000/svg"
-                width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd"
-                    d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
-            </svg> Volver atras</a>
+                    width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                        d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                </svg> Volver atras</a>
             <button type="submit" class="btn btn-primary">Enviar <svg xmlns="http://www.w3.org/2000/svg" width="16"
                     height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"

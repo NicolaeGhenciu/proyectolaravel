@@ -24,15 +24,17 @@
     <div class="vh-100 d-flex justify-content-center align-items-center">
         <div class="col-md-4 p-5 shadow-sm border rounded-5 bg-white" style="border-radius: 2%">
             <h2 class="text-center mb-4 text-primary">Login Form</h2>
-            <form>
+            <form action="{{ route('session.login') }}" method="post">
+                @csrf
                 <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                     <input type="email" class="form-control border border-primary" id="exampleInputEmail1"
-                        aria-describedby="emailHelp">
+                        aria-describedby="emailHelp" name="email">
                 </div>
                 <div class="mb-3">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control border border-primary" id="exampleInputPassword1">
+                    <input type="password" class="form-control border border-primary" id="exampleInputPassword1"
+                        name="password">
                 </div>
                 <p class="small"><a class="text-primary" href="forget-password.html">Forgot password?</a></p>
                 <div class="d-grid">

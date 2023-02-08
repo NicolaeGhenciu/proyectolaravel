@@ -28,7 +28,6 @@
                         <th scope="col">Id</th>
                         <th scope="col">NIF</th>
                         <th scope="col">Nombre y Apellidos</th>
-                        <th scope="col">Contraseña</th>
                         <th scope="col">Fecha de alta</th>
                         <th scope="col">Correo electronico</th>
                         <th scope="col">Télefono</th>
@@ -41,9 +40,8 @@
                         <td>{{ $empleado->id }}</td>
                         <td>{{ $empleado->nif }}</td>
                         <td>{{ $empleado->nombre_y_apellidos }}</td>
-                        <td>{{ $empleado->clave }}</td>
                         <td>{{ date('d-m-Y', strtotime($empleado->fecha_alta)) }}</td>
-                        <td>{{ $empleado->correo }}</td>
+                        <td>{{ $empleado->email }}</td>
                         <td>{{ $empleado->telefono }}</td>
                         <td>{{ $empleado->direccion }}</td>
                         <td>{{ $empleado->es_admin == 0 ? '👨🏻‍🔧 Operario' : '👨🏻‍💼 Administrador' }}</td>

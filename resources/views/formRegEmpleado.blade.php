@@ -36,9 +36,10 @@
         </div>
 
         <div class="col-md-3">
-            <label for="clave" class="form-label">Contraseña:</label>
-            <input class="form-control" type="text" name="clave" value="{{ old('clave') }}" placeholder="Clave">
-            {!! $errors->first('clave', '<b style="color: red">:message</b>') !!}
+            <label for="password" class="form-label">Contraseña:</label>
+            <input class="form-control" type="text" name="password" value="{{ old('password') }}"
+                placeholder="Contraseña">
+            {!! $errors->first('password', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">
@@ -48,13 +49,13 @@
         </div>
 
         <div class="col-md-3">
-            <label for="correo" class="form-label">Correo electrónico: </label>
+            <label for="email" class="form-label">Correo electrónico: </label>
             <div class="input-group">
                 <span class="input-group-text" id="inputGroupPrepend2">@</span>
-                <input class="form-control" type="text" name="correo" placeholder="Correo electrónico"
-                    value="{{ old('correo') }}">
+                <input class="form-control" type="text" name="email" placeholder="Correo electrónico"
+                    value="{{ old('email') }}">
             </div>
-            {!! $errors->first('correo', '<b style="color: red">:message</b>') !!}
+            {!! $errors->first('email', '<b style="color: red">:message</b>') !!}
         </div>
 
         <div class="col-md-3">

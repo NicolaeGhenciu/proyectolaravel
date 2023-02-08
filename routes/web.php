@@ -6,6 +6,8 @@ use App\Http\Controllers\ControllerTareas;
 use App\Http\Controllers\ControllerClientes;
 use App\Http\Controllers\ControllerEmpleados;
 use App\Http\Controllers\ControllerCuotas;
+use App\Http\Controllers\SessionController;
+
 
 
 /*
@@ -74,7 +76,14 @@ Route::delete('/borrarCuota/{cuota}', [ControllerCuotas::class, 'borrarCuota'])-
 Route::get('/formTarea', [ControllerTareas::class, 'formularioInsertar'])->name('formTarea');
 Route::post('formTarea', [ControllerTareas::class, 'validarInsertar']);
 
-Route::get('/listaTareas', [ControllerTareas::class, 'listar'])->name('listaTareas');
+//Route::get('/listaTareas', [ControllerTareas::class, 'listar'])->name('listaTareas');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/listaTareas', [ControllerTareas::class, 'listar'])->name('listaTareas');
+});
+
+// Route::middleware(['auth'])->group(function () {
+    
+// });
 
 Route::get('/detallesTarea/{tarea}', [ControllerTareas::class, 'detallesTarea'])->name('detallesTarea');
 
@@ -90,4 +99,10 @@ Route::put('/modificarTarea/{tarea}', [ControllerTareas::class, 'modificarTarea'
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('login');
+
+Route::post('/login', [SessionController::class, 'login'])->name('session.login');
+
+Route::post('logout', [SessionController::class, 'logout'])->name('logout');
+
+//Route::post('logout', 'SessionController@logout')->name('logout');
