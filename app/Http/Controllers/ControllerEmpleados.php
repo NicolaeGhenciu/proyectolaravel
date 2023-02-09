@@ -70,7 +70,7 @@ class ControllerEmpleados extends Controller
         $datos = request()->validate([
             'nif' => ['required', new DniRule],
             'nombre_y_apellidos' => 'required|min:3|max:100',
-            'password' => 'required|min:6|max:15|regex:/^[^,]*$/',
+            //'password' => 'required|min:6|max:15|regex:/^[^,]*$/',
             'fecha_alta' => 'required',
             'email' => 'required|email',
             'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
@@ -78,7 +78,7 @@ class ControllerEmpleados extends Controller
             'es_admin' => 'required',
         ]);
 
-        $datos['password'] = Hash::make($datos['password']);
+        //$datos['password'] = Hash::make($datos['password']);
 
         $empleado->update($datos);
         session()->flash('message', 'La tarea ha sido modificada correctamente.');

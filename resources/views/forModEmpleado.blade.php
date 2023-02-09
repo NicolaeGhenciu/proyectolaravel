@@ -30,12 +30,12 @@
             {!! $errors->first('nombre_y_apellidos', '<b style="color: red">:message</b>') !!}
         </div>
 
-        <div class="col-md-3">
+        {{-- <div class="col-md-3">
             <label for="password" class="form-label">Contraseña:</label>
             <input class="form-control" type="text" name="password" value="{{ old('password') ?? $empleado->password }}"
                 placeholder="Contraseña">
             {!! $errors->first('password', '<b style="color: red">:message</b>') !!}
-        </div>
+        </div> --}}
 
         <div class="col-md-3">
             <label for="fecha_alta" class="form-label">Fecha de alta: </label>

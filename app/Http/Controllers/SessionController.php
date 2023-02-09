@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class SessionController extends Controller
 {
@@ -21,11 +20,12 @@ class SessionController extends Controller
             //dd(Empleado::where('email', $request->email)->first());
             $empleado = Empleado::where('email', $request->email)->first();
             //dd($empleado->es_admin);
+            
             if ($empleado->es_admin === 1) {
-                session(['administrador']);
+                
                 return redirect()->route('listaEmpleados');
             } else {
-                session(['operario' => $empleado->role]);
+                
                 return redirect()->route('listaTareas');
             }
         }
