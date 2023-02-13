@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
+
     @yield('linkScript')
 
     <title>@yield('titulo')</title>
@@ -36,56 +38,66 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Insertar
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item {{ request()->routeIs('formTarea') ? 'active' : '' }}"
-                        href="{{ route('formTarea') }}">Tarea</a>
-                    <a class="dropdown-item {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
-                        href="{{ route('formRegEmpleado') }}">Empleado</a>
-                    <a class="dropdown-item {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
-                        href="{{ route('formRegCliente') }}">Cliente</a>
-                    <a class="dropdown-item {{ request()->routeIs('formularioCuota') ? 'active' : '' }}"
-                        href="{{ route('formularioCuota') }}">Cuota excepcional</a>
-                    <a class="dropdown-item {{ request()->routeIs('formRemesaMensual') ? 'active' : '' }}"
-                        href="{{ route('formRemesaMensual') }}">Remesa mensual</a>
-                </div>
+                @if (Auth::check() && Auth::user()->es_admin === 1)
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Insertar
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item {{ request()->routeIs('formTarea') ? 'active' : '' }}"
+                            href="{{ route('formTarea') }}">Tarea</a>
+                        <a class="dropdown-item {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
+                            href="{{ route('formRegEmpleado') }}">Empleado</a>
+                        <a class="dropdown-item {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
+                            href="{{ route('formRegCliente') }}">Cliente</a>
+                        <a class="dropdown-item {{ request()->routeIs('formularioCuota') ? 'active' : '' }}"
+                            href="{{ route('formularioCuota') }}">Cuota excepcional</a>
+                        <a class="dropdown-item {{ request()->routeIs('formRemesaMensual') ? 'active' : '' }}"
+                            href="{{ route('formRemesaMensual') }}">Remesa mensual</a>
+                    </div>
             </li>
+            @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Listar
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item {{ request()->routeIs('listaTareas') ? 'active' : '' }}"
-                        href="{{ route('listaTareas') }}">Tareas</a>
-                    <a class="dropdown-item {{ request()->routeIs('listaEmpleados') ? 'active' : '' }}"
-                        href="{{ route('listaEmpleados') }}">Empleados</a>
-                    <a class="dropdown-item {{ request()->routeIs('listaClientes') ? 'active' : '' }}"
-                        href="{{ route('listaClientes') }}">Clientes</a>
-                    <a class="dropdown-item {{ request()->routeIs('listaCuotas') ? 'active' : '' }}"
-                        href="{{ route('listaCuotas', 'fecha_emision') }}">Cuotas</a>
+                    @if (Auth::check() && Auth::user()->es_admin === 0)
+                        <a class="dropdown-item {{ request()->routeIs('listaTareasOperario') ? 'active' : '' }}"
+                            href="{{ route('listaTareasOperario') }}">Tareas</a>
+                    @endif
+                    @if (Auth::check() && Auth::user()->es_admin === 1)
+                        <a class="dropdown-item {{ request()->routeIs('listaTareas') ? 'active' : '' }}"
+                            href="{{ route('listaTareas') }}">Tareas</a>
+                        <a class="dropdown-item {{ request()->routeIs('listaEmpleados') ? 'active' : '' }}"
+                            href="{{ route('listaEmpleados') }}">Empleados</a>
+                        <a class="dropdown-item {{ request()->routeIs('listaClientes') ? 'active' : '' }}"
+                            href="{{ route('listaClientes') }}">Clientes</a>
+                        <a class="dropdown-item {{ request()->routeIs('listaCuotas') ? 'active' : '' }}"
+                            href="{{ route('listaCuotas', 'fecha_emision') }}">Cuotas</a>
+                    @endif
                 </div>
             </li>
         </ul>
     </div>
-    <span class="text-white px-4">{{ Auth::user()->nombre_y_apellidos }} |
-        {{ Auth::user()->es_admin == 0 ? '👨🏻‍🔧 Operario' : '👨🏻‍💼 Administrador' }}</span>
-    @if (Auth::check())
-        <a class="btn btn-outline-danger" href="{{ route('logout') }}"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-door-open-fill" viewBox="0 0 16 16">
-                <path
-                    d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
-            </svg>
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
-    @endif
+    <div class="d-flex align-items-center">
+        <span class="text-white px-4">{{ Auth::user()->nombre_y_apellidos }} |
+            {{ Auth::user()->es_admin == 0 ? '👨🏻‍🔧 Operario' : '👨🏻‍💼 Administrador' }}</span>
+        @if (Auth::check())
+            <a class="btn btn-outline-danger ml-auto" href="{{ route('logout') }}"
+                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z" />
+                </svg>
+            </a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+        @endif
+    </div>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </nav>
 
@@ -131,8 +143,8 @@
                     <path
                         d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
                 </svg></a></li>
-        <li class="ms-3"><a class="text-muted" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                    height="16" fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
+        <li class="ms-3"><a class="text-muted" href="#"><svg xmlns="http://www.w3.org/2000/svg"
+                    width="16" height="16" fill="currentColor" class="bi bi-messenger" viewBox="0 0 16 16">
                     <path
                         d="M0 7.76C0 3.301 3.493 0 8 0s8 3.301 8 7.76-3.493 7.76-8 7.76c-.81 0-1.586-.107-2.316-.307a.639.639 0 0 0-.427.03l-1.588.702a.64.64 0 0 1-.898-.566l-.044-1.423a.639.639 0 0 0-.215-.456C.956 12.108 0 10.092 0 7.76zm5.546-1.459-2.35 3.728c-.225.358.214.761.551.506l2.525-1.916a.48.48 0 0 1 .578-.002l1.869 1.402a1.2 1.2 0 0 0 1.735-.32l2.35-3.728c.226-.358-.214-.761-.551-.506L9.728 7.381a.48.48 0 0 1-.578.002L7.281 5.98a1.2 1.2 0 0 0-1.735.32z" />
                 </svg></a></li>

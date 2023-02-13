@@ -7,19 +7,19 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-class Administrador
+class Operario
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
+     * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
     public function handle($request, Closure $next)
     {
         $empleado = Auth::user();
-        if ($empleado->es_admin === 0) {
+        if ($empleado->es_admin === 1) {
             return redirect()->back();
         }
     

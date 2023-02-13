@@ -20,13 +20,11 @@ class SessionController extends Controller
             //dd(Empleado::where('email', $request->email)->first());
             $empleado = Empleado::where('email', $request->email)->first();
             //dd($empleado->es_admin);
-            
+
             if ($empleado->es_admin === 1) {
-                
                 return redirect()->route('listaEmpleados');
             } else {
-                
-                return redirect()->route('listaTareas');
+                return redirect()->route('listaTareasOperario');
             }
         }
 
