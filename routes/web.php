@@ -8,6 +8,7 @@ use App\Http\Controllers\ControllerEmpleados;
 use App\Http\Controllers\ControllerCuotas;
 use App\Http\Controllers\ControllerTareasOperario;
 use App\Http\Controllers\SessionController;
+use App\Mail\SiempreColgadosMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/modificarEmpleado/{empleado}', [ControllerEmpleados::class, 'modificarEmpleado'])->name('modificarEmpleado');
     });
 
+    Route::get('/miCuenta/{empleado}', [ControllerEmpleados::class, 'verMiCuenta'])->name('miCuenta');
+    Route::put('/modificarMiCuenta/{empleado}', [ControllerEmpleados::class, 'modificarMiCuenta'])->name('modificarMiCuenta');
+
     //---Cliente
 
     Route::middleware(['administrador'])->group(function () {
@@ -85,6 +89,9 @@ Route::middleware(['auth'])->group(function () {
         //Borrar cuota
         Route::get('/mensajeBorrarCuota/{cuota}', [ControllerCuotas::class, 'mensajeBorrar'])->name('mensajeBorrarCuota');
         Route::delete('/borrarCuota/{cuota}', [ControllerCuotas::class, 'borrarCuota'])->name('borrarCuota');
+
+        //Generar Factura Cuota
+        Route::get('/generatePDF/{cuota}', [ControllerCuotas::class, 'generarFacturaPdf'])->name('generatePDF');
     });
 
     //--Tareas
@@ -129,8 +136,13 @@ Route::get('/', function () {
     return view('login');
 })->name('login');
 
+
 //Controlador del login
 Route::post('/login', [SessionController::class, 'login'])->name('session.login');
 
 //Desloguearse
 Route::post('logout', [SessionController::class, 'logout'])->name('logout');
+
+// Route::get('/email', function () {
+//     Mail::to("elon@tesla.com")->send(new SiempreColgadosMail());
+// })->name('email');

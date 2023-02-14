@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NosecaenMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Cliente;
-
 use App\Models\Cuota;
-
 use App\Models\Tarea;
+
+use PDF;
 
 class ControllerCuotas extends Controller
 {
@@ -127,5 +129,12 @@ class ControllerCuotas extends Controller
         $cuota->update($datos);
         session()->flash('message', 'La cuota ha sido modificada correctamente.');
         return redirect()->route('listaCuotas', 'fecha_emision');
+    }
+
+    public function generarFacturaPdf(Cuota $cuota)
+    {
+        $pdf = PDF::loadView('facturas.factura', compact('cuota'));
+
+        return $pdf->download('Factura Cuta ' . $cuota->id . ' ' . $cuota->concepto . '.pdf');
     }
 }

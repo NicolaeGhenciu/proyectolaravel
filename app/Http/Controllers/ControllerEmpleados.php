@@ -84,4 +84,24 @@ class ControllerEmpleados extends Controller
         session()->flash('message', 'La tarea ha sido modificada correctamente.');
         return redirect()->route('listaEmpleados');
     }
+
+    public function verMiCuenta(Empleado $empleado)
+    {
+        $empleados = Empleado::all();
+        return view('miCuenta', compact('empleado'));
+    }
+
+    public function modificarMiCuenta(Empleado $empleado)
+    {
+        $datos = request()->validate([
+            'email' => 'required|email',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'direccion' => 'required|min:6|max:100',
+            'fecha_alta' => 'required',
+        ]);
+
+        $empleado->update($datos);
+        session()->flash('message', 'Los datos han sido actualizados correctamente.');
+        return redirect()->route('miCuenta',$empleado);
+    }
 }
