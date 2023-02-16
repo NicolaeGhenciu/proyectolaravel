@@ -50,7 +50,12 @@ class ControllerTareas extends Controller
 
     public function listar()
     {
-        $tareas = Tarea::orderBy('fecha_realizacion', 'desc')->paginate(10);
+        //$tareas = Tarea::orderBy('fecha_realizacion', 'desc')->paginate(10);
+        $tareas = Tarea::whereHas('cliente', function ($query) {
+            $query->whereNull('clientes.deleted_at');
+        })
+            ->orderBy('fecha_realizacion', 'desc')
+            ->paginate(10);
 
         return view('listaTareas', compact('tareas'));
     }
@@ -112,5 +117,59 @@ class ControllerTareas extends Controller
         $tarea->update($datos);
         session()->flash('message', 'La tarea ha sido modificada correctamente.');
         return redirect()->route('listaTareas');
+    }
+
+    public function formTareaParaClientes(Request $request)
+    {
+        $provincias = Provincia::all();
+        $empleados = Empleado::all();
+        $clientes = Cliente::all();
+        return view('formTareaParaCliente', compact('provincias'));
+    }
+
+    public function validarformTareaParaCliente()
+    {
+
+        $datos = request()->validate([
+            'cliente_cif' => 'required',
+            'telefono_cliente' => 'required',
+
+            'clientes_id' => '',
+            'nombre_y_apellidos' => 'required|min:3|max:100|regex:/^[^,]*$/',
+            'telefono' => 'required|regex:/^(?:(?:\+?[0-9]{2,4})?[ ]?[6789][0-9 ]{8,13})$/',
+            'correo' => 'required|email',
+            'descripcion' => 'required',
+            'direccion' => '',
+            'poblacion' => 'required',
+            'codigo_postal' => ['required', 'regex:/^(0[1-9]|[1-4][0-9]|5[0-2])[0-9]{3}$/'],
+            'provincias_cod' => 'required',
+            'estado' => '',
+            'empleados_id' => '',
+            'fecha_realizacion' => 'required|after:now',
+        ]);
+
+        $cliente = Cliente::where('cif', $datos['cliente_cif'])
+            ->where('telefono', $datos['telefono_cliente'])
+            ->first();
+
+        if (
+            $cliente != null
+        ) {
+            //Quitamos los que no nos 
+            unset($datos['cliente_cif']);
+            unset($datos['telefono_cliente']);
+
+            $datos['fecha_creacion'] = (new \DateTime())->format('Y-m-d');
+            $datos['estado'] = "P";
+            $datos['clientes_id'] = $cliente->id;
+
+            Tarea::create($datos);
+
+            //dd($datos);
+            session()->flash('message', 'La tarea ha sido registrada correctamente.');
+            return redirect()->route('formTareaParaClientes');
+        }
+        session()->flash('error', 'El cliente introducido no existe.');
+        return redirect()->route('formTareaParaClientes');
     }
 }

@@ -54,7 +54,7 @@
                                 @if ($tarea->cliente)
                                     {{ $tarea->cliente->cif }}
                                 @else
-                                    Cliente dado de baja
+                                    Cliente no encontrado
                                 @endif
                             </td>
                             <td>{{ $tarea->nombre_y_apellidos }}</td>
@@ -63,7 +63,7 @@
                                 @if ($tarea->empleado)
                                     {{ $tarea->empleado->nif }}
                                 @else
-                                    Empleado dado de baja
+                                    Empleado no asignado
                                 @endif
                             </td>
                             <td>{{ date('d-m-Y', strtotime($tarea->fecha_creacion)) }}</td>

@@ -6,9 +6,10 @@ use App\Http\Controllers\ControllerTareas;
 use App\Http\Controllers\ControllerClientes;
 use App\Http\Controllers\ControllerEmpleados;
 use App\Http\Controllers\ControllerCuotas;
+use App\Http\Controllers\ControllerMail;
 use App\Http\Controllers\ControllerTareasOperario;
 use App\Http\Controllers\SessionController;
-use App\Mail\SiempreColgadosMail;
+//use App\Mail\SiempreColgadosMail;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,13 +137,23 @@ Route::get('/', function () {
     return view('login');
 })->name('login');
 
-
 //Controlador del login
 Route::post('/login', [SessionController::class, 'login'])->name('session.login');
 
 //Desloguearse
 Route::post('logout', [SessionController::class, 'logout'])->name('logout');
 
-// Route::get('/email', function () {
+//--- Cliente sin cuenta
+
+//Insertar una tarea como Cliente
+Route::get('/formTareaParaClientes', [ControllerTareas::class, 'formTareaParaClientes'])->name('formTareaParaClientes');
+Route::post('formTareaParaClientes', [ControllerTareas::class, 'validarformTareaParaCliente']);
+
+Route::get('/formRecuperarPass', [ControllerMail::class, 'formRecuperarPass'])->name('formRecuperarPass');
+Route::post('formRecuperarPass', [ControllerMail::class, 'validarRecuperarContraseña']);
+
+// Route::get('/email', function () {validarformularioParaClientes
 //     Mail::to("elon@tesla.com")->send(new SiempreColgadosMail());
 // })->name('email');
+
+Route::get('/email', [ControllerMail::class, 'enviarCorreo'])->name('email');

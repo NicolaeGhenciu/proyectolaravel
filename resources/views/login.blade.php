@@ -36,15 +36,18 @@
                     <input type="password" class="form-control border border-primary" id="exampleInputPassword1"
                         name="password">
                 </div>
-                <p class="small"><a class="text-primary" href="forget-password.html">Forgot password?</a></p>
+                <p class="small"><a class="text-primary" href="{{ route('formRecuperarPass') }}">Has olvidado tu
+                        contraseña?</a></p>
                 <div class="d-grid">
                     <button class="btn btn-primary" type="submit">Login</button>
                 </div>
             </form>
             <div class="mt-3">
-                <p class="mb-0  text-center">Don't have an account? <a href="signup.html"
+                {{-- <p class="mb-0  text-center">Don't have an account? <a href="signup.html"
                         class="text-primary fw-bold">Sign
-                        Up</a></p>
+                        Up</a></p> --}}
+                <p class="mb-0  text-center">Registrar incidencia como cliente? <a
+                        href="{{ route('formTareaParaClientes') }}" class="text-primary fw-bold">Pincha aqui</a></p>
             </div>
         </div>
     </div>

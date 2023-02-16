@@ -72,20 +72,39 @@ class ControllerCuotas extends Controller
     //Listar Cuotas
 
     public function listar($filtro = "")
+
     {
         $tareas = Tarea::all();
         switch ($filtro) {
             case "NO":
-                $cuotas = Cuota::where('pagada', 'NO')->orderBy('fecha_emision', 'asc')->paginate(10);
+                $cuotas = Cuota::where('pagada', 'NO')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->orderBy('fecha_emision', 'asc')
+                    ->paginate(10);
                 break;
             case "SI":
-                $cuotas = Cuota::where('pagada', 'SI')->orderBy('fecha_emision', 'asc')->paginate(10);
+                $cuotas = Cuota::where('pagada', 'SI')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->orderBy('fecha_emision', 'asc')
+                    ->paginate(10);
                 break;
             case "fecha_pago":
-                $cuotas = Cuota::orderBy('fecha_pago', 'desc')->paginate(10);
+                $cuotas = Cuota::orderBy('fecha_pago', 'desc')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->paginate(10);
                 break;
             default:
-                $cuotas = Cuota::orderBy('fecha_emision', 'desc')->paginate(10);
+                $cuotas = Cuota::orderBy('fecha_emision', 'desc')
+                    ->whereHas('cliente', function ($query) {
+                        $query->whereNull('deleted_at');
+                    })
+                    ->paginate(10);
                 break;
         }
         return view('listaCuotas', compact('cuotas', 'tareas'));

@@ -5,11 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}">
 
@@ -111,28 +128,6 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </nav>
 
-{{-- <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <div class="nav navbar-nav">
-        <b><a class="nav-link active" href="#">🏗️ SIEMPRECOLGADOS S.A</a></b>
-        <a class="nav-link {{ request()->routeIs('formRegEmpleado') ? 'active' : '' }}"
-            href="{{ route('formRegEmpleado') }}">Insertar Empleado</a>
-        <a class="nav-link {{ request()->routeIs('formRegCliente') ? 'active' : '' }}"
-            href="{{ route('formRegCliente') }}">Insertar Cliente</a>
-        <a class="nav-link {{ request()->routeIs('formCuota') ? 'active' : '' }}"
-            href="{{ route('formCuota') }}">Insertar Cuota</a>
-        <a class="nav-link {{ request()->routeIs('formTarea') ? 'active' : '' }}"
-            href="{{ route('formTarea') }}">Insertar Tareas</a>
-        <a class="nav-link {{ request()->routeIs('listaTareas') ? 'active' : '' }}"
-            href="{{ route('listaTareas') }}">Lista de Tareas</a>
-        <a class="nav-link {{ request()->routeIs('listaEmpleados') ? 'active' : '' }}"
-            href="{{ route('listaEmpleados') }}">Lista de Empleados</a>
-        <a class="nav-link {{ request()->routeIs('listaClientes') ? 'active' : '' }}"
-            href="{{ route('listaClientes') }}">Lista de Clientes</a>
-        <a class="nav-link {{ request()->routeIs('listaCuotas') ? 'active' : '' }}"
-            href="{{ route('listaCuotas') }}">Lista de Cuotas</a>
-    </div>
-</nav> --}}
-
 <body>
     @yield('contenido')
 </body>
@@ -163,6 +158,7 @@
                     <path
                         d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
                 </svg></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"></a></li>
         <li class="ms-3"><a class="text-muted" href="#"></a></li>
     </ul>
 </footer>
