@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/modificarEmpleado/{empleado}', [ControllerEmpleados::class, 'modificarEmpleado'])->name('modificarEmpleado');
     });
 
-    Route::get('/miCuenta/{empleado}', [ControllerEmpleados::class, 'verMiCuenta'])->name('miCuenta');
+    Route::get('/miCuenta/{empleado}', [ControllerEmpleados::class, 'verMiCuenta'])->middleware('verificarEmpleadoCuenta')->name('miCuenta');
     Route::put('/modificarMiCuenta/{empleado}', [ControllerEmpleados::class, 'modificarMiCuenta'])->name('modificarMiCuenta');
 
     //---Cliente
@@ -93,6 +93,9 @@ Route::middleware(['auth'])->group(function () {
 
         //Generar Factura Cuota
         Route::get('/generatePDF/{cuota}', [ControllerCuotas::class, 'generarFacturaPdf'])->name('generatePDF');
+
+        //Enviar factura de cuota por correo
+        Route::get('/enviarCuotaCorreo/{empleado}/{cuota}', [ControllerMail::class, 'enviarCuota'])->name('enviarCuotaCorreo');
     });
 
     //--Tareas

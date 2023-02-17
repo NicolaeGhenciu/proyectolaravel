@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Rules\DniRule;
 use App\Models\Empleado;
+use App\Models\Cuota;
+
+use PDF;
 
 class ControllerMail extends Controller
 {
@@ -56,6 +59,26 @@ class ControllerMail extends Controller
             session()->flash('error', 'Los datos introducidos no coinciden con ningun empleado.');
         }
         return redirect()->route('formRecuperarPass');
+    }
+
+    public function enviarCuota(Empleado $empleado, Cuota $cuota)
+    {
+        $email = 'nicoadrianx42x@gmail.com';
+
+        $pdf = PDF::loadView('facturas.factura', compact('cuota'));
+        $pdf_content = $pdf->output();
+
+        $asunto = "Factura $cuota->id $cuota->concepto";
+
+        Mail::send('email.cuotaPDF', ['empleado' => $empleado, 'asunto' => $asunto], function ($message) use ($email, $pdf_content, $asunto) {
+            $message->to($email)
+                ->subject($asunto)
+                ->attachData($pdf_content, "$asunto.pdf");
+        });
+
+        session()->flash('message', 'La factura ha sido enviada al cliente correctamente.');
+
+        return redirect()->route('listaCuotas', 'fecha_emision');
     }
 
     public function generatePass()
