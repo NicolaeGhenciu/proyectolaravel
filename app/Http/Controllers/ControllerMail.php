@@ -40,6 +40,7 @@ class ControllerMail extends Controller
             //dd($pass);
 
             $email = "nicoadrianx42x@gmail.com";
+            //$email = $datos['email'];
 
             $datos['password'] = $pass;
 

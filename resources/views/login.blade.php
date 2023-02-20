@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css"
+        integrity="sha384-b6lVK+yci+bfDmaY1u0zE8YYJt0TZxLEAFyYSLHId4xoVvsrQu3INevFKo+Xir8e" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
@@ -40,6 +42,10 @@
                         contraseña?</a></p>
                 <div class="d-grid">
                     <button class="btn btn-primary" type="submit">Login</button>
+                    <a href="{{ route('google') }}" class="btn btn-danger mt-1" type="submit">Continuar con &nbsp;<i
+                            class="bi bi-google"></i></a>
+                    <a href="{{ route('github') }}" class="btn btn-dark mt-1" type="submit">Continuar con &nbsp;<i
+                            class="bi bi-github"></i></a>
                 </div>
             </form>
             <div class="mt-3">

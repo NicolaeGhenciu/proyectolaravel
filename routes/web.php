@@ -8,7 +8,11 @@ use App\Http\Controllers\ControllerEmpleados;
 use App\Http\Controllers\ControllerCuotas;
 use App\Http\Controllers\ControllerMail;
 use App\Http\Controllers\ControllerTareasOperario;
+use App\Http\Controllers\GitHubController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SessionController;
+
+use Laravel\Socialite\Facades\Socialite;
 //use App\Mail\SiempreColgadosMail;
 
 /*
@@ -159,4 +163,14 @@ Route::post('formRecuperarPass', [ControllerMail::class, 'validarRecuperarContra
 //     Mail::to("elon@tesla.com")->send(new SiempreColgadosMail());
 // })->name('email');
 
-Route::get('/email', [ControllerMail::class, 'enviarCorreo'])->name('email');
+// Route::get('/email', [ControllerMail::class, 'enviarCorreo'])->name('email');
+
+Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google');
+Route::get('/googlecallback', [GoogleController::class, 'handleGoogleCallback'])->name('googlecallback');
+
+Route::get('/github', [GitHubController::class, 'redirectToProvider'])->name('github');
+Route::get('/githubcallback', [GitHubController::class, 'handleProviderCallback'])->name('githubcallback');
+
+// Route::get('/google', function () {
+//     return Socialite::driver('google')->redirect();
+// })->name("google");
