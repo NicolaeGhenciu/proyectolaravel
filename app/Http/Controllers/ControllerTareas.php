@@ -17,7 +17,8 @@ class ControllerTareas extends Controller
     public function formularioInsertar(Request $request)
     {
         $provincias = Provincia::all();
-        $empleados = Empleado::all();
+        //$empleados = Empleado::all();
+        $empleados = Empleado::whereNotNull('nif')->get();
         $clientes = Cliente::all();
         return view('formTarea', compact('provincias', 'empleados', 'clientes'));
     }
@@ -80,7 +81,8 @@ class ControllerTareas extends Controller
     public function forModTarea(Tarea $tarea)
     {
         $provincias = Provincia::all();
-        $empleados = Empleado::all();
+        //$empleados = Empleado::all();
+        $empleados = Empleado::whereNotNull('nif')->get();
         $clientes = Cliente::all();
         return view('forModTarea', compact('tarea', 'provincias', 'empleados', 'clientes'));
     }

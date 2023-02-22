@@ -11,7 +11,7 @@
 <body>
     <h3>🏗️ SIEMPRECOLGADOS S.A</h3>
     <hr>
-    <p>Estimado <i>{{ $empleado->nombre_y_apellidos }}</i>,</p>
+    <p>Estimado <i>{{ $cliente->nombre_y_apellidos }}</i>,</p>
     <p>Adjunto le enviamos la {{ $asunto }}</p>
     <p>Un cordial saludo,</p>
     <hr>

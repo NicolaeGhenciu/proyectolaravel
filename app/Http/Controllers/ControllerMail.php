@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Rules\DniRule;
 use App\Models\Empleado;
 use App\Models\Cuota;
+use App\Models\Cliente;
 
 use PDF;
 
@@ -62,7 +63,7 @@ class ControllerMail extends Controller
         return redirect()->route('formRecuperarPass');
     }
 
-    public function enviarCuota(Empleado $empleado, Cuota $cuota)
+    public function enviarCuota(Cuota $cuota)
     {
         $email = 'nicoadrianx42x@gmail.com';
 
@@ -71,7 +72,9 @@ class ControllerMail extends Controller
 
         $asunto = "Factura $cuota->id $cuota->concepto";
 
-        Mail::send('email.cuotaPDF', ['empleado' => $empleado, 'asunto' => $asunto], function ($message) use ($email, $pdf_content, $asunto) {
+        $cliente = Cliente::where('id', $cuota['clientes_id'])->first();
+
+        Mail::send('email.cuotaPDF', ['cliente' => $cliente, 'asunto' => $asunto], function ($message) use ($email, $pdf_content, $asunto) {
             $message->to($email)
                 ->subject($asunto)
                 ->attachData($pdf_content, "$asunto.pdf");

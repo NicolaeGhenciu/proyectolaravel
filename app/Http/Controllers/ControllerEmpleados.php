@@ -101,6 +101,6 @@ class ControllerEmpleados extends Controller
 
         $empleado->update($datos);
         session()->flash('message', 'Los datos han sido actualizados correctamente.');
-        return redirect()->route('miCuenta',$empleado);
+        return redirect()->route('miCuenta', $empleado);
     }
 }

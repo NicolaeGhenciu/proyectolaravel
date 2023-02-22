@@ -17,11 +17,18 @@
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse
-                    plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                    appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
-                    custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go
-                    within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nostrum nisi expedita facilis enim ut
+                    dicta dolore suscipit debitis fugit minima, illum architecto harum voluptate impedit reiciendis
+                    voluptas quos distinctio sequi.
+                    Dignissimos, quam? Quasi dolores recusandae, necessitatibus repudiandae laboriosam debitis ipsam
+                    nobis dolore aliquid laudantium ab at mollitia exercitationem praesentium consequuntur libero ullam
+                    facilis, explicabo magni. Odio sapiente nihil rerum dicta.
+                    A natus consectetur saepe iure assumenda, possimus sit aspernatur beatae reprehenderit quod sed,
+                    eveniet, ex tempore. Repellendus quos perspiciatis dolorem est non quidem, culpa voluptatibus quis.
+                    Perspiciatis reprehenderit obcaecati assumenda!
+                    Deserunt animi praesentium, harum, cupiditate illo sint iste accusantium obcaecati esse non in quo
+                    voluptate, velit impedit alias eum tenetur. Sequi nobis corrupti eaque beatae consequuntur, aliquid
+                    eos enim reprehenderit.
                 </div>
             </div>
         </div>
@@ -35,11 +42,9 @@
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse
-                    plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                    appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
-                    custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go
-                    within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio sit ab officiis illo molestias et porro
+                    adipisci quae omnis fugiat sint aliquid eligendi, voluptatum nobis fuga modi reprehenderit voluptatibus
+                    veniam?
                 </div>
             </div>
         </div>
@@ -53,11 +58,15 @@
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
                 data-bs-parent="#accordionExample">
                 <div class="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse
-                    plugin adds the appropriate classes that we use to style each element. These classes control the overall
-                    appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with
-                    custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go
-                    within the <code>.accordion-body</code>, though the transition does limit overflow.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto nesciunt odit distinctio
+                    perspiciatis nemo similique! Dolores odio eveniet, ipsa illum in, quis alias nam magnam nulla
+                    consectetur, esse quisquam obcaecati?
+                    Repellendus dolor aliquam eveniet at dolore perspiciatis. Nihil animi, doloribus eos, ut sunt,
+                    reiciendis expedita laboriosam quam laudantium suscipit sapiente quidem alias impedit pariatur quae
+                    ex asperiores minus qui praesentium.
+                    Eligendi, saepe! Repellat neque sed, perferendis quia autem et nemo ipsum reiciendis provident,
+                    quaerat tenetur optio dignissimos consequatur. Tenetur cupiditate veniam reprehenderit illo
+                    temporibus amet provident tempora ea neque praesentium.
                 </div>
             </div>
         </div>

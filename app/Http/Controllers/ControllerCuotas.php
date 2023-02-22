@@ -36,7 +36,23 @@ class ControllerCuotas extends Controller
         foreach ($clientes as $cliente) {
             $data['clientes_id'] = $cliente->id;
             $data['importe'] = $cliente->cuota_mensual;
-            Cuota::create($data);
+
+            $cuota = Cuota::create($data);
+
+            //-----enviar correos cuota remesa mensual
+
+            // $email = 'nicoadrianx42x@gmail.com';
+
+            // $pdf = PDF::loadView('facturas.factura', compact('cuota'));
+            // $pdf_content = $pdf->output();
+
+            // $asunto = "Factura $cuota->id $cuota->concepto";
+
+            // Mail::send('email.cuotaPDF', ['cliente' => $cliente, 'asunto' => $asunto], function ($message) use ($email, $pdf_content, $asunto) {
+            //     $message->to($email)
+            //         ->subject($asunto)
+            //         ->attachData($pdf_content, "$asunto.pdf");
+            // });
         }
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
@@ -48,7 +64,7 @@ class ControllerCuotas extends Controller
 
     public function formularioCuota(Request $request)
     {
-        $clientes = Cliente::all();
+        $clientes = Cliente::whereNull('deleted_at')->get();
         return view('formCuotaExcepcional', compact('clientes'));
     }
 
@@ -62,7 +78,28 @@ class ControllerCuotas extends Controller
             'notas' => 'required',
         ]);
 
-        Cuota::create($data);
+        $cuota = Cuota::create($data);
+
+        //-----Enviar Cuota excepcional por correo automaticamente
+
+        $cliente = Cliente::where('id', $data['clientes_id'])->first();
+        //$cliente = Cliente::where('id', $data['clientes_id'])->whereNotNull('deleted_at')->first();
+
+        //dd($cliente);
+
+        $email = 'nicoadrianx42x@gmail.com';
+
+        $pdf = PDF::loadView('facturas.factura', compact('cuota'));
+        $pdf_content = $pdf->output();
+
+
+        $asunto = "Factura $cuota->id $cuota->concepto";
+
+        Mail::send('email.cuotaPDF', ['cliente' => $cliente, 'asunto' => $asunto], function ($message) use ($email, $pdf_content, $asunto) {
+            $message->to($email)
+                ->subject($asunto)
+                ->attachData($pdf_content, "$asunto.pdf");
+        });
 
         session()->flash('message', 'La cuota ha sido creada correctamente.');
 

@@ -55,6 +55,7 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/modificarEmpleado/{empleado}', [ControllerEmpleados::class, 'modificarEmpleado'])->name('modificarEmpleado');
     });
 
+    //Ver algunos detalles de mi cuenta y modificarlos.
     Route::get('/miCuenta/{empleado}', [ControllerEmpleados::class, 'verMiCuenta'])->middleware('verificarEmpleadoCuenta')->name('miCuenta');
     Route::put('/modificarMiCuenta/{empleado}', [ControllerEmpleados::class, 'modificarMiCuenta'])->name('modificarMiCuenta');
 
@@ -99,7 +100,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/generatePDF/{cuota}', [ControllerCuotas::class, 'generarFacturaPdf'])->name('generatePDF');
 
         //Enviar factura de cuota por correo
-        Route::get('/enviarCuotaCorreo/{empleado}/{cuota}', [ControllerMail::class, 'enviarCuota'])->name('enviarCuotaCorreo');
+        Route::get('/enviarCuotaCorreo/{cuota}', [ControllerMail::class, 'enviarCuota'])->name('enviarCuotaCorreo');
     });
 
     //--Tareas
@@ -156,21 +157,14 @@ Route::post('logout', [SessionController::class, 'logout'])->name('logout');
 Route::get('/formTareaParaClientes', [ControllerTareas::class, 'formTareaParaClientes'])->name('formTareaParaClientes');
 Route::post('formTareaParaClientes', [ControllerTareas::class, 'validarformTareaParaCliente']);
 
+//Enviar correo para recuperar contraseña
 Route::get('/formRecuperarPass', [ControllerMail::class, 'formRecuperarPass'])->name('formRecuperarPass');
 Route::post('formRecuperarPass', [ControllerMail::class, 'validarRecuperarContraseña']);
 
-// Route::get('/email', function () {validarformularioParaClientes
-//     Mail::to("elon@tesla.com")->send(new SiempreColgadosMail());
-// })->name('email');
-
-// Route::get('/email', [ControllerMail::class, 'enviarCorreo'])->name('email');
-
+//Inicio de sesion con Google
 Route::get('/google', [GoogleController::class, 'redirectToGoogle'])->name('google');
 Route::get('/googlecallback', [GoogleController::class, 'handleGoogleCallback'])->name('googlecallback');
 
+//Inicio de sesion con Github
 Route::get('/github', [GitHubController::class, 'redirectToProvider'])->name('github');
 Route::get('/githubcallback', [GitHubController::class, 'handleProviderCallback'])->name('githubcallback');
-
-// Route::get('/google', function () {
-//     return Socialite::driver('google')->redirect();
-// })->name("google");

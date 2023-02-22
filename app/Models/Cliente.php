@@ -13,7 +13,7 @@ class Cliente extends Model
 
     protected $table = 'clientes';
     public $timestamps = false;
-    protected $fillable = ['cif', 'nombre_y_apellidos', 'telefono', 'correo', 'cuenta_corriente', 'importe_cuota_mensual', 'pais_id', 'moneda'];
+    protected $fillable = ['cif', 'nombre_y_apellidos', 'telefono', 'correo', 'cuenta_corriente', 'cuota_mensual', 'pais_id', 'moneda'];
 
     public function pais()
     {

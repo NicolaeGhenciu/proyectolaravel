@@ -83,7 +83,7 @@
                         </li>
                     @endfor
                     <li class="page-item {{ $clientes->currentPage() == $clientes->lastPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $clientes->url(5) }}">Última</a>
+                        <a class="page-link" href="{{ $clientes->url($clientes->lastPage()) }}">Última</a>
                     </li>
                     <li class="page-item {{ $clientes->currentPage() == $clientes->lastPage() ? 'disabled' : '' }}">
                         <a class="page-link" href="{{ $clientes->nextPageUrl() }}">Siguiente</a>

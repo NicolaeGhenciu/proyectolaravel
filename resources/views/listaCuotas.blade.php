@@ -76,7 +76,7 @@
                                     {{ date('d-m-Y', strtotime($cuota->fecha_emision)) }}
                                 @endif
                             </td>
-                            <td>{{ $cuota->importe }} €</td>
+                            <td>{{ $cuota->importe }} {{ $cuota->cliente->moneda }}</td>
                             <td>{{ $cuota->pagada == 'SI' ? '✅' : '❌' }}</td>
                             <td>
                                 @if ($cuota->fecha_pago)
@@ -92,7 +92,7 @@
                                 <a class="btn btn-success" title="Descargar Factura PDF"
                                     href="{{ route('generatePDF', $cuota) }}"><i class="bi bi-filetype-pdf"></i></a>
                                 <a class="btn btn-info" title="Enviar Factura al Cliente"
-                                    href="{{ route('enviarCuotaCorreo', ['empleado' => Auth::user(), 'cuota' => $cuota]) }}"><i
+                                    href="{{ route('enviarCuotaCorreo', ['cuota' => $cuota]) }}"><i
                                         class="bi bi-envelope-fill"></i></a>
                             </td>
                     @endforeach
@@ -115,7 +115,7 @@
                         </li>
                     @endfor
                     <li class="page-item {{ $cuotas->currentPage() == $cuotas->lastPage() ? 'disabled' : '' }}">
-                        <a class="page-link" href="{{ $cuotas->url(5) }}">Última</a>
+                        <a class="page-link" href="{{ $cuotas->url($cuotas->lastPage()) }}">Última</a>
                     </li>
                     <li class="page-item {{ $cuotas->currentPage() == $cuotas->lastPage() ? 'disabled' : '' }}">
                         <a class="page-link" href="{{ $cuotas->nextPageUrl() }}">Siguiente</a>

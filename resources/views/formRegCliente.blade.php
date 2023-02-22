@@ -98,7 +98,7 @@
                     @else
                         @if (!in_array($pais->nombre_moneda, $monedasMostradas))
                             <?php array_push($monedasMostradas, $pais->nombre_moneda); ?>
-                            <option value="{{ $pais->nombre_moneda }}"
+                            <option value="{{ $pais->iso_moneda }}"
                                 {{ old('moneda') == $pais->nombre_moneda ? 'selected' : '' }}>
                                 {{ $pais->nombre_moneda }}</option>
                         @endif
