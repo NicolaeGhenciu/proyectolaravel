@@ -32,13 +32,29 @@
                         <div class="form-group list-group-item">
                             <label><b>Fecha Emisión:</b> {{ date('d-m-Y', strtotime($cuota->fecha_emision)) }}</label>
                         </div>
-                        <div class="form-group list-group-item">
-                            <label>Importe: <b>{{ $cuota->importe }} €</b></label>
-                        </div>
-                        {{-- <div class="form-group list-group-item">
-                            <label class="font-weight-bold">Pagada:</label>
-                            <p class="mb-0">{{ $cuota->pagada }}</p>
-                        </div> --}}
+                        @if ($tipo_cambio != '')
+                            <div class="form-group list-group-item">
+                                <label><b>Importe moneda extranjera:</b> {{ $cuota->importe }}
+                                    {{ $cliente->moneda }}</label>
+                            </div>
+                            <div class="form-group list-group-item">
+                                <label><b>Fecha de conversion:</b> {{ $tipo_cambio['fecha_conversion'] }}</label>
+                            </div>
+                            <div class="form-group list-group-item">
+                                <label><b>1 {{ $cliente->moneda }} equivale a {{ $tipo_cambio['rate'] }} EUR</b>
+                                </label>
+                            </div>
+                            <div class="form-group list-group-item">
+                                <label><b>Importe moneda local:</b>
+                                    {{ $tipo_cambio['importe_api'] }} €</label>
+                            </div>
+                        @endif
+                        @if ($tipo_cambio == '')
+                            <div class="form-group list-group-item">
+                                <label><b>Importe :</b> {{ $cuota->importe }}
+                                    {{ $cliente->moneda }}</label>
+                            </div>
+                        @endif
                         @if ($cuota->pagada == 'SI')
                             <div class="form-group list-group-item">
                                 <label class="font-weight-bold">Fecha Pago:</label>

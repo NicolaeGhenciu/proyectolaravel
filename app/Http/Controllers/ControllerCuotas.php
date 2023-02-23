@@ -89,7 +89,16 @@ class ControllerCuotas extends Controller
 
         $email = 'nicoadrianx42x@gmail.com';
 
-        $pdf = PDF::loadView('facturas.factura', compact('cuota'));
+        $tipo_cambio = "";
+
+        if ($cliente['moneda'] != "EUR") {
+            $tipo_cambio = $this->obtenerTipoDeCambio($cliente, $cuota);
+        }
+
+        //dd($tipo_cambio, $cliente, $cuota);
+
+        $pdf = PDF::loadView('facturas.factura', compact('cuota', 'cliente', 'tipo_cambio'));
+
         $pdf_content = $pdf->output();
 
 
@@ -189,8 +198,87 @@ class ControllerCuotas extends Controller
 
     public function generarFacturaPdf(Cuota $cuota)
     {
-        $pdf = PDF::loadView('facturas.factura', compact('cuota'));
+        $cliente = Cliente::where('id', $cuota['clientes_id'])->first();
 
-        return $pdf->download('Factura Cuta ' . $cuota->id . ' ' . $cuota->concepto . '.pdf');
+        $tipo_cambio = "";
+
+        if ($cliente['moneda'] != "EUR") {
+            $tipo_cambio = $this->obtenerTipoDeCambio($cliente, $cuota);
+        }
+
+        $pdf = PDF::loadView('facturas.factura', compact('cuota', 'cliente', 'tipo_cambio'));
+
+        return $pdf->download('Factura Cuota ' . $cuota->id . ' ' . $cuota->concepto . '.pdf');
     }
+
+
+    public function obtenerTipoDeCambio($cliente, $cuota)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.apilayer.com/fixer/convert?to=EUR&from=" . $cliente['moneda'] . "&amount=" . $cuota['importe'] . "",
+            CURLOPT_HTTPHEADER => array(
+                "Content-Type: text/plain",
+                "apikey: KSpigeqxDQS4Ur61vCKKhliO3BrEheWc"
+            ),
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET"
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $response = json_decode($response, true);
+
+        return [
+            'importe_api' => $response["result"],
+            'fecha_conversion' => $response["date"],
+            'rate' => $response["info"]["rate"]
+        ];
+    }
+
+
+    // public function generarFacturaPdf(Cuota $cuota)
+    // {
+
+    //     $cliente = Cliente::where('id', $cuota['clientes_id'])->first();
+
+    //     $curl = curl_init();
+
+    //     curl_setopt_array($curl, array(
+    //         CURLOPT_URL => "https://api.apilayer.com/fixer/convert?to=" . $cliente['moneda'] . "&from=EUR&amount=" . $cuota['importe'] . "",
+    //         CURLOPT_HTTPHEADER => array(
+    //             "Content-Type: text/plain",
+    //             "apikey: KSpigeqxDQS4Ur61vCKKhliO3BrEheWc"
+    //         ),
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_ENCODING => "",
+    //         CURLOPT_MAXREDIRS => 10,
+    //         CURLOPT_TIMEOUT => 0,
+    //         CURLOPT_FOLLOWLOCATION => true,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => "GET"
+    //     ));
+
+    //     $response = curl_exec($curl);
+
+    //     curl_close($curl);
+
+    //     $response = json_decode($response, true);
+
+    //     $importe_extranjero = $response["result"];
+    //     $fecha_conversion = $response["date"];
+    //     $rate = $response["info"]["rate"];
+
+    //     $pdf = PDF::loadView('facturas.factura', compact('cuota', 'cliente', 'importe_extranjero', 'fecha_conversion', 'rate'));
+
+    //     return $pdf->download('Factura Cuta ' . $cuota->id . ' ' . $cuota->concepto . '.pdf');
+    // }
 }
