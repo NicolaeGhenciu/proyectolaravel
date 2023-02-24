@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.7",
+        "paypal/rest-api-sdk-php": "*",
         "spatie/laravel-permission": "^5.9",
         "tecnickcom/tcpdf": "^6.6"
     },

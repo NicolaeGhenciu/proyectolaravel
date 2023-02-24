@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\NosecaenMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -31,7 +30,7 @@ class ControllerCuotas extends Controller
             'notas' => 'required',
         ]);
 
-        $clientes = Cliente::all();
+        $clientes = Cliente::get();
 
         foreach ($clientes as $cliente) {
             $data['clientes_id'] = $cliente->id;
@@ -218,10 +217,10 @@ class ControllerCuotas extends Controller
 
         curl_setopt_array($curl, array(
             CURLOPT_URL => "https://api.apilayer.com/fixer/convert?to=EUR&from=" . $cliente['moneda'] . "&amount=" . $cuota['importe'] . "",
-            CURLOPT_HTTPHEADER => array(
+            CURLOPT_HTTPHEADER => [
                 "Content-Type: text/plain",
                 "apikey: KSpigeqxDQS4Ur61vCKKhliO3BrEheWc"
-            ),
+            ],
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,

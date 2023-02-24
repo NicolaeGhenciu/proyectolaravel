@@ -11,6 +11,7 @@ use App\Http\Controllers\ControllerTareasOperario;
 use App\Http\Controllers\GitHubController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\PaymentController;
 
 use Laravel\Socialite\Facades\Socialite;
 //use App\Mail\SiempreColgadosMail;
@@ -101,6 +102,11 @@ Route::middleware(['auth'])->group(function () {
 
         //Enviar factura de cuota por correo
         Route::get('/enviarCuotaCorreo/{cuota}', [ControllerMail::class, 'enviarCuota'])->name('enviarCuotaCorreo');
+
+        //PayPal
+
+        Route::get('/paypal/pagar/{cuota}', [PaymentController::class, 'pagarConPaypal'])->name('formularioPaypal');
+        Route::get('/paypal/status', [PaymentController::class, 'paypalStatus'])->name('paypalStatus');
     });
 
     //--Tareas

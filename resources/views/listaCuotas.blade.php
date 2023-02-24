@@ -94,6 +94,9 @@
                                 <a class="btn btn-info" title="Enviar Factura al Cliente"
                                     href="{{ route('enviarCuotaCorreo', ['cuota' => $cuota]) }}"><i
                                         class="bi bi-envelope-fill"></i></a>
+                                <a class="btn btn-primary" title="Pagar con Paypal"
+                                    href="{{ route('formularioPaypal', ['cuota' => $cuota->importe]) }}"><i
+                                        class="bi bi-paypal"></i></a>
                             </td>
                     @endforeach
                 </tbody>
