@@ -14,6 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class ControllerTareas extends Controller
 {
 
+    /**
+     * formularioInsertar - Muestra el formulario para insertar una tarea
+     *
+     * @param  Request $request La solicitud HTTP recibida
+     * return nos lleva a la vista del formulario
+     */
+
     public function formularioInsertar(Request $request)
     {
         $provincias = Provincia::all();
@@ -22,6 +29,12 @@ class ControllerTareas extends Controller
         $clientes = Cliente::all();
         return view('formTarea', compact('provincias', 'empleados', 'clientes'));
     }
+
+    /**
+     * validarInsertar - valida los datos para insertar la tarea
+     *
+     * return nos lleva a la vista del formulario tarea
+     */
 
     public function validarInsertar()
     {
@@ -48,6 +61,12 @@ class ControllerTareas extends Controller
 
         return redirect()->route('formTarea');
     }
+
+    /**
+     * Muestra una lista de tareas
+     *
+     * return La vista de listaTareas con los resultados de la búsqueda
+     */
 
     public function listar()
     {

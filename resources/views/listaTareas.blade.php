@@ -36,6 +36,7 @@
             <table class="table">
                 <thead class="table-dark">
                     <tr>
+                        <th scope="col">Numero de orden</th>
                         <th scope="col">Id</th>
                         <th scope="col">Cliente</th>
                         <th scope="col">Nombre y Apellidos</th>
@@ -47,8 +48,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($tareas as $tarea)
+                    @foreach ($tareas as $index => $tarea)
                         <tr>
+                            <td>{{ ($tareas->currentPage() - 1) * $tareas->perPage() + $index + 1 }}</td>
                             <td>{{ $tarea->id }}</td>
                             <td>
                                 @if ($tarea->cliente)

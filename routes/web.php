@@ -70,12 +70,17 @@ Route::middleware(['auth'])->group(function () {
         // Listar un cliente
         Route::get('/listaClientes', [ControllerClientes::class, 'listar'])->name('listaClientes');
 
+        // Listar un cliente
+        Route::get('/listaClientesRusos', [ControllerClientes::class, 'listaClientesRusos'])->name('listaClientesRusos');
+
+        Route::get('/generarlistaClientesRusosPdf', [ControllerClientes::class, 'generarlistaClientesRusosPdf'])->name('generarlistaClientesRusosPdf');
+
         // Borrar un cliente
         Route::get('/mensajeBorrarCliente/{cliente}', [ControllerClientes::class, 'mensajeBorrar'])->name('mensajeBorrarCliente');
         Route::delete('/borrarCliente/{cliente}', [ControllerClientes::class, 'borrarCliente'])->name('borrarCliente');
     });
 
-    //---Cuotas
+    //---Cuotas 
 
     Route::middleware(['administrador'])->group(function () {
         //Insertar Remesa Mensual
@@ -85,6 +90,8 @@ Route::middleware(['auth'])->group(function () {
         //Insertar Cuota Excepcional
         Route::get('/formularioCuota', [ControllerCuotas::class, 'formularioCuota'])->name('formularioCuota');
         Route::post('formularioCuota', [ControllerCuotas::class, 'validarCuotaExcepcional']);
+
+        Route::get('/tiposCambio', [ControllerCuotas::class, 'tiposCambio'])->name('tiposCambio');
 
         //Lista Cuota + filtro
         Route::get('/listaCuotas/{filtro}', [ControllerCuotas::class, 'listar'])->name('listaCuotas');

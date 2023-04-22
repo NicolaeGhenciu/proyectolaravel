@@ -88,7 +88,6 @@
                 @endforeach
             </select>
         </div>
-
         <div class="col-md-3">
             <label for="moneda" class="form-label">Monedas:</label>
             <select class="form-select" name="moneda">

@@ -18,10 +18,23 @@ use PDF;
 class ControllerMail extends Controller
 {
 
+    /**
+     * formRecuperarPass: muestra un formulario para recuperar la contraseñas
+     *
+     * @param Request $request - el objeto de solicitud HTTP
+     * return retorna la vista del formulario para recuperar la contraseña
+     */
+
     public function formRecuperarPass(Request $request)
     {
         return view('formRecuperarPass', $request);
     }
+
+    /**
+     * validarRecuperarContraseña - valida los datos para recuperar la contraseña del empleado
+     *
+     * return nos lleva a la vista del formulario de recuperar contraseña
+     */
 
     public function validarRecuperarContraseña()
     {
@@ -63,6 +76,13 @@ class ControllerMail extends Controller
         return redirect()->route('formRecuperarPass');
     }
 
+    /**
+     * enviarCuota: envía una factura adjunta en formato PDF al cliente correspondiente
+     *
+     * @param Cuota $cuota - el objeto de la cuota correspondiente a la factura
+     * @return redirect - redirige a "listaCuotas" ordenada por fecha de emisión
+     */
+
     public function enviarCuota(Cuota $cuota)
     {
         $email = 'nicoadrianx42x@gmail.com';
@@ -91,6 +111,14 @@ class ControllerMail extends Controller
         return redirect()->route('listaCuotas', 'fecha_emision');
     }
 
+    /**
+     * Genera una contraseña aleatoria.
+     *
+     * La contraseña generada tiene una longitud de 8 caracteres y al menos una letra mayúscula y un número.
+     *
+     * @return string La contraseña generada.
+     */
+
     public function generatePass()
     {
         $password = '';
@@ -110,6 +138,15 @@ class ControllerMail extends Controller
         }
         return $password;
     }
+
+    /**
+     * obtenerTipoDeCambio: Obtiene el tipo de cambio entre la moneda del cliente y el euro
+     * utilizando la API de Fixer.io.
+     *
+     * @param $cliente Los datos del cliente.
+     * @param $cuota Los datos de la cuota.
+     * @return array Un array que devuelve el importe de la conversion, el rate y la fecha de conversion.
+     */
 
     public function obtenerTipoDeCambio($cliente, $cuota)
     {
